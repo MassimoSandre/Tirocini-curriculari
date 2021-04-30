@@ -1,0 +1,154 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\renewcommand{\contentsname}{Contenuti}
+
+\title{Tirocini curriculari}
+\author{Massimo Albino Sandretti}
+\date{Anno Scolastico 2020-2021}
+
+\begin{document}
+
+\maketitle
+
+
+\tableofcontents
+\newpage
+
+\section{Introduzione}
+\subsection{Realtà d'interesse}
+Si deve realizzare un sito web dinamico in grado di gestire i dati relativi ai tirocini formativi degli studenti.
+Il progetto consiste nella realizzazione di una banca dati che modelli i dati coinvolti e nella implementazione
+di un sito web dinamico che permetta l'utilizzo del data base tramite adeguata interfaccia web.
+Un Istituto di Istruzione Superiore vuole gestire i dati relativi ai Percorsi per le Competenze Trasversali e per
+l’Orientamento (PCTO) degli allievi.
+Occorre registrare i dati relativi alle aziende, ai docenti tutor e agli allievi, suddivisi per classe e per indirizzo.
+Al sito possono accedere i docenti tutor e le aziende, che vengono identificati dopo una fase di autenticazione.
+Le aziende accedono per scaricare e stampare la documentazione relativa ai contratti di collaborazione e per
+conoscere i dati degli alunni che svolgeranno l'attività di tutoraggio presso di loro, mentre i docenti tutor
+possono stampare le convenzioni con le aziende e inserire i dati della valutazione aziendale al termine del
+PCTO.
+Il database da realizzare deve contenere i dati utili delle aziende convenzionate che hanno dato la propria
+adesione e quelli degli allievi con gli abbinamenti allievo - azienda, allievo - docenti tutor e allievo - tutor
+aziendale.
+Il sito web deve mostrare diverse interfacce una per ogni categoria di utenti; l'interfaccia della pagina web deve
+essere una sorta di "cruscotto elettronico" nel quale l'utente può decidere l'operazione da svolgere.
+Il candidato analizzi la realtà di riferimento e, fatte le opportune ipotesi aggiuntive, individui una soluzione
+che a suo motivato giudizio sia la più idonea per la gestione della base di dati.
+\subsection{Analisi}
+\subsection{Ipotesi aggiuntive}
+\begin{itemize}
+    \item L'amministratore inserisce i dati degli studenti e dei docenti
+    \item Una volta inseriti i dati, sarà generata una chiave d'accesso che poi sarà inviata via email all'azienda, al tutor, allo studente o al docente per permettergli di accedere e visionare/inserire/modificare i propri dati.
+    \item L'amministratore effettua il collegamento studente-tutor. Inoltre può anche eliminare o modificare tale collegamento
+    \item Il responsabile d'indirizzo può visionare i dati degli studenti facenti parte degli indirizzi di cui è responsabile e le relative associazioni con i tutor e le aziende.
+    \item Il tutor (aziendale) è una figura nominata dalla azienda, che segue gli studenti durante il PCTO. Un tutor può seguire più studenti (anche contemporaneamente).
+    \item Dato che l'attività di PCTO viene generalmente svolta più di una volta, uno studente potrebbe anche avere più tutor.
+    \item L'azienda che accede può visionare i dati degli studenti che svolgeranno o hanno svolto il PCTO presso di loro
+    \item L'azienda inoltre può inserire e modificare i dati dei propri tutor. Tuttavia dopo che ha inserito i dati, per confermare la registrazione, serve l'autorizzazione di un amministratore
+    \item Il tutor può visionare i dati degli studenti che svolgeranno PCTO, nella azienda che rapprsenta, sotto la sua supervisione.
+    \item Il responsabile può effettuare la valutazione aziendale al termine del PCTO
+    \item Nulla vieta che uno studente possa effetturare il PCTO nella stessa azienda sotto lo stesso tutor.
+    \item Un indirizzo non può avere più responsabili, ma un responsabile può essere attribuito a più indirizzi
+    \item Un indirizzo può avere più classi, ma ogni classe può avere un solo indirizzo
+    \item Un amministratore è un responsabile particolare che non può essere collegato ad un indirizzo
+    
+\end{itemize}
+\subsection{Glossario}
+
+\section{Progettazione del Database}
+\subsection{Progettazione concettuale}
+\subsubsection{Entità-attributi}
+\begin{itemize}
+    \item Indirizzi
+    \begin{itemize}
+        \item sigla
+        \item nome
+    \end{itemize}
+    \item Classi
+    \begin{itemize}
+        \item id\_classe
+        \item anno
+        \item sezione
+    \end{itemize}
+    \item Responsabili
+    \begin{itemize}
+        \item id\_responsabile
+        \item nome
+        \item cognome
+        \item password
+        \item email
+    \end{itemize}
+    \item Studenti
+    \begin{itemize}
+        \item id\_studente
+        \item nome
+        \item cognome
+        \item password
+        \item email
+    \end{itemize}
+    \item Aziende
+    \begin{itemize}
+        \item id\_azienda
+        \item denominazione
+        \item password
+        \item email
+    \end{itemize}
+    \item Tutor
+    \begin{itemize}
+        \item id\_tutor
+        \item nome
+        \item cognome
+        \item password
+        \item email
+        \item autorizzato
+    \end{itemize}
+    
+\end{itemize}
+\subsubsection{Associazioni}
+\begin{itemize}
+    \item Rappresenta(Tutor, Aziende)\\*
+    1 Tutor rappresenta 1 Azienda\\*
+    1 Azienda è rappresentata da N tutor
+    \item Segue$_1$(Tutor, Studenti)\\*
+    1 Tutor segue N Studenti\\*
+    1 Studente è seguito da N Tutor
+    \item Segue$_2$(Responsabili, Indirizzi)\\*
+    1 Responsabile segue N Indirizzi\\*
+    1 Indirizzo è seguito da 1 Responsabili
+    \item Riguarda(Classi, Indirizzi)\\*
+    1 Classe riguarda 1 Indirizzo\\*
+    1 Indirizzo è riguardato da N Classi
+    \item Appartiene(Studenti, Classi)\\*
+    1 Studente appartiene ad 1 Classe\\*
+    ad 1 Classe appartengono N Studenti
+    
+\end{itemize}
+
+\subsubsection{Schema ER grezzo}
+\subsubsection{Ristrutturazione schema ER}
+\subsubsection{Schema ER ristrutturato}
+
+\subsection{Progettazione logica}
+\subsubsection{Schema logico}
+\subsubsection{Verifica normalizzazione}
+\subsubsection{Tracciato record}
+
+\subsection{Progettazione fisica}
+\subsubsection{Creazione tabelle MySQL}
+\subsubsection{Implementazione vincoli}
+
+\section{Interfaccia Web}
+\subsection{Installazione Database}
+\subsection{Utenti}
+\subsubsection{Amministratore}
+\subsubsection{Aziende}
+\subsubsection{Docenti}
+
+\subsection{Pagine}
+\subsubsection{Amministrazione}
+\subsubsection{Aziende}
+\subsubsection{Docenti}
+
+\section{Sicurezza dei dati????}
+
+\end{document}
