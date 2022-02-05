@@ -96,33 +96,81 @@ body {
 }
 
 
-input[type=text]:not(.errorinput), input[type=password]:not(.errorinput), input[type=number]:not(.errorinput), input[type=email]:not(.errorinput) {
-    width: 90%;
+.adminprofile a{
+    text-decoration: none;
+    color: black;
+    font-size:medium;
+    background-color: #aaa;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+button {
+    padding: 12px 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin: auto;
+    width:100%;
+}
+
+.cancella {
+    background-color: red !important;
+}
+
+input[type=text]:not(.errorinput), input[type=date], input[type=password]:not(.errorinput), input[type=number]:not(.errorinput), input[type=email]:not(.errorinput) {
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    margin-left: 10px;
+    
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.errorinput {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    
+    display: inline-block;
+    border: 1px solid red;
+    border-radius: 4px;
+    box-sizing: border-box;
+
 }
 
 #modeselector, #salselector {
     margin-top: 10px;
 }
 
+.filseldiv {
+    margin: 10px auto;
+    width: 70%;
+}
+
+.logindiv {
+    margin: 10% auto;
+    width: 60%;
+    background: #bbb;
+    box-shadow: 5px 5px 2px 1px #333333;
+    padding: 20px;
+    border-radius: 4px;
+}
+
 select {
-    width: 95%;
+    width: 100%;
     padding: 8px 10px;
-    margin: 0px 0;
-    margin-left: 10px;
+
+
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -141,11 +189,11 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:not(.rdb) {
+input[type=submit]:not(.rdb),input[type=button]:not(.rdb) {
     background-color: #4CAF50;
 }
 
-input[type=submit]:disabled {
+input[type=submit]:disabled,input[type=button]:disabled {
     background-color: gray;
     
     
@@ -160,12 +208,16 @@ input[type=submit]:disabled {
     margin-top: 10px;
 }
 
-input[type=submit]:hover:not(:disabled):not(.rdb) {
-  background-color: #45a049;
+input[type=submit]:hover:not(:disabled):not(.rdb),input[type=button]:hover:not(:disabled):not(.rdb) {
+    background-color: #45a049;
 }
 
 .error {
     color: red;
+}
+
+table {
+    margin: auto;
 }
 
 .ltable {
@@ -176,10 +228,16 @@ input[type=submit]:hover:not(:disabled):not(.rdb) {
     
 }
 
-.ltable th, .ltable td, .ltable tr {
+.ltable th, .ltable td:not(.ext), .ltable tr {
     padding: 10px;
     border-radius: 4px;
     text-align: center;
+}
+
+.ext button {
+    margin: 0px;
+    padding: 10px 5px;
+    border-radius: 4px;
 }
 
 .dispari {
@@ -198,4 +256,78 @@ input[type=submit]:hover:not(:disabled):not(.rdb) {
     background-color: #444;
     color: #eee;
     font-weight: bold;
+}
+
+.clickable:hover, .clickable:hover td {
+    background-color: #444;
+    color: #eee;
+    transition: background-color 0.5s ease;
+}
+
+.inline-block-item {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin: 5px 10px 6px 12px;
+    background-color: #bbb;
+    border-radius: 10px;
+    box-shadow: 8px 8px 6px #888888;
+    cursor: pointer;
+}
+
+.inline-block-item div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color:#555;
+    
+}
+
+.inline-block-item:hover {
+    background-color: #999;
+    transition: background-color 0.5s ease;
+}
+
+.profiletable {
+    margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+   
+}
+
+.profiletable .usertype {
+    font-size: 20px;
+    color: #999;
+}
+
+.info {
+    font-size: 20px;
+}
+
+.bg {
+    display: none;
+    background-color: rgba(0,0,0,0.5);
+    top:0;
+    left:0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg form {
+    background-color: white;
+    width: 50%;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.info {
+    padding-top: 10px;
 }

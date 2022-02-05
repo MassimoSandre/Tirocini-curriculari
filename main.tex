@@ -1,10 +1,21 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \renewcommand{\contentsname}{Contenuti}
 
+\usepackage[margin=1.1in]{geometry}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+
+
 \title{Tirocini curriculari}
-\author{Massimo Albino Sandretti}
-\date{Anno Scolastico 2020-2021}
+\author{\textbf{Studente}\\
+Massimo Albino Sandretti\\
+massimo.sandretti@gmail.com\\\\
+\textbf{Docente di riferimento}\\
+Riccardo Minauro}
+\date{\textbf{Data di consegna}\\31-05-2021}
 
 \begin{document}
 
@@ -15,10 +26,12 @@
 \newpage
 
 \section{Introduzione}
+\subsection{Scopo del progetto}
+Lo scopo del progetto è quello di realizzare un sito web dinamico per gestire i dati relativi ai tirocini formativi degli studenti.\\*
+Il progetto consisterà nella realizzazione di una base di dati e nell'implementazione di un sito web che funga da interfaccia per accedere a questi dati.
+Il sito web deve mostrare diverse interfacce una per ogni categoria di utenti; l'interfaccia della pagina web deve
+essere una sorta di "cruscotto elettronico" nel quale l'utente può decidere l'operazione da svolgere.
 \subsection{Realtà d'interesse}
-Si deve realizzare un sito web dinamico in grado di gestire i dati relativi ai tirocini formativi degli studenti.
-Il progetto consiste nella realizzazione di una banca dati che modelli i dati coinvolti e nella implementazione
-di un sito web dinamico che permetta l'utilizzo del data base tramite adeguata interfaccia web.
 Un Istituto di Istruzione Superiore vuole gestire i dati relativi ai Percorsi per le Competenze Trasversali e per
 l’Orientamento (PCTO) degli allievi.
 Occorre registrare i dati relativi alle aziende, ai docenti tutor e agli allievi, suddivisi per classe e per indirizzo.
@@ -30,125 +43,1837 @@ PCTO.
 Il database da realizzare deve contenere i dati utili delle aziende convenzionate che hanno dato la propria
 adesione e quelli degli allievi con gli abbinamenti allievo - azienda, allievo - docenti tutor e allievo - tutor
 aziendale.
-Il sito web deve mostrare diverse interfacce una per ogni categoria di utenti; l'interfaccia della pagina web deve
-essere una sorta di "cruscotto elettronico" nel quale l'utente può decidere l'operazione da svolgere.
-Il candidato analizzi la realtà di riferimento e, fatte le opportune ipotesi aggiuntive, individui una soluzione
-che a suo motivato giudizio sia la più idonea per la gestione della base di dati.
-\subsection{Analisi}
-\subsection{Ipotesi aggiuntive}
+
+\subsection{Analisi e ipotesi aggiuntive}
 \begin{itemize}
-    \item L'amministratore inserisce i dati degli studenti e dei docenti
-    \item Una volta inseriti i dati, sarà generata una chiave d'accesso che poi sarà inviata via email all'azienda, al tutor, allo studente o al docente per permettergli di accedere e visionare/inserire/modificare i propri dati.
-    \item L'amministratore effettua il collegamento studente-tutor. Inoltre può anche eliminare o modificare tale collegamento
-    \item Il responsabile d'indirizzo può visionare i dati degli studenti facenti parte degli indirizzi di cui è responsabile e le relative associazioni con i tutor e le aziende.
-    \item Il tutor (aziendale) è una figura nominata dalla azienda, che segue gli studenti durante il PCTO. Un tutor può seguire più studenti (anche contemporaneamente).
-    \item Dato che l'attività di PCTO viene generalmente svolta più di una volta, uno studente potrebbe anche avere più tutor.
-    \item L'azienda che accede può visionare i dati degli studenti che svolgeranno o hanno svolto il PCTO presso di loro
-    \item L'azienda inoltre può inserire e modificare i dati dei propri tutor. Tuttavia dopo che ha inserito i dati, per confermare la registrazione, serve l'autorizzazione di un amministratore
-    \item Il tutor può visionare i dati degli studenti che svolgeranno PCTO, nella azienda che rapprsenta, sotto la sua supervisione.
-    \item Il responsabile può effettuare la valutazione aziendale al termine del PCTO
-    \item Nulla vieta che uno studente possa effetturare il PCTO nella stessa azienda sotto lo stesso tutor.
-    \item Un indirizzo non può avere più responsabili, ma un responsabile può essere attribuito a più indirizzi
-    \item Un indirizzo può avere più classi, ma ogni classe può avere un solo indirizzo
-    \item Un amministratore è un responsabile particolare che non può essere collegato ad un indirizzo
+    \item L'amministratore può registrare qualsiasi tipo di utente (Amministratore, Docente, Studente, Referente e Tutor) e il Referente può registrare solo Tutor relativi alla azienda che rappresenta. Non esiste nessun altro modo per ottenere un account utente se non la registrazione da parte di una di queste due figure.
+    \item Un tutor registrato da un Amministratore sarà direttamente abilitato di default, mentre un tutor registrato da un Referente necessiterà dell'abilitazione da parte di un amministratore per potere iniziare a utilizzare il sito.
+    \item Una volta inseriti i dati, sarà generata una password che poi sarà inviata via email all'utente per permettergli di accedere.
+    \item L'amministratore è l'unico che può effettuare il collegamento studente-tutor. Inoltre può anche eliminare o modificare tale collegamento
+    \item Il docente può visionare i dati degli studenti e delle classi facenti parte degli indirizzi di cui è responsabile e le relative associazioni con i tutor e le aziende. Inoltre può inserire la valutazione di un'attività di tirocinio degli studenti di sua competenza, una volta che suddetta attività sarà finita.
+    \item Il docente può accedere alla documentazione relativa alla collaborazione azienda-scuola solo nel momento in cui uno degli studenti di cui è il responsabile effettua un'attività di PCTO presso l'azienda in questione.
+    \item Il tutor è una figura nominata dalla azienda, che segue gli studenti durante il PCTO. Un tutor può seguire più studenti (anche contemporaneamente).
+    \item Dato che l'attività di PCTO viene generalmente svolta più di una volta, uno studente potrebbe anche avere più tutor. Non è tuttavia detto che due attività di tirocinio di uno studente siano seguite da due tutor diversi.
+    \item Il referente può visionare i dati degli studenti che svolgeranno o hanno svolto il PCTO presso l'azienda che rappresenta
+    \item Il tutor può visionare i dati degli studenti che svolgeranno o hanno svolto PCTO sotto la sua supervisione.
+    \item Un indirizzo non può avere più docenti responsabili, ma un docente responsabile può essere attribuito a più indirizzi.
+    \item Un indirizzo può avere più classi, ma ogni classe può avere un solo indirizzo.
     
 \end{itemize}
-\subsection{Glossario}
 
 \section{Progettazione del Database}
 \subsection{Progettazione concettuale}
 \subsubsection{Entità-attributi}
 \begin{itemize}
-    \item Indirizzi
+    \item Indirizzi: rappresenta gli indirizzi scolastici in cui le classi sono divise
     \begin{itemize}
-        \item sigla
-        \item nome
+        \item \textbf{\underline{sigla}}: chiave primaria, è una sigla univoca per ogni indirizzo 
+        \item \textbf{nome}: nome esteso dell'indirizzo
     \end{itemize}
-    \item Classi
+    \item Classi: rappresenta le classi a cui gli alunni appartengono
     \begin{itemize}
-        \item id\_classe
-        \item anno
-        \item sezione
+        \item \textbf{\underline{ID\_classe}}: chiave primaria
+        \item \textbf{anno}: anno scolastico della classe (da 1 a 5)
+        \item \textbf{sezione}: sezione della classe (a-z)
     \end{itemize}
-    \item Responsabili
+    \item Aziende: aziende che collaborano con la scuola 
     \begin{itemize}
-        \item id\_responsabile
-        \item nome
-        \item cognome
-        \item password
-        \item email
+        \item \textbf{\underline{ID\_azienda}}: chiave primaria
+        \item \textbf{denominazione}: denominazione dell'azienda
+        \item \textbf{percorso\_doc}: indica il percorso dove è memorizzata la documentazione per la collaborazione scuola-azienda
     \end{itemize}
-    \item Studenti
+    \item Utenti
     \begin{itemize}
-        \item id\_studente
-        \item nome
-        \item cognome
-        \item password
-        \item email
+        \item \textbf{\underline{ID\_utente}}: chiave primaria
+        \item \textbf{nome}
+        \item \textbf{cognome}
+        \item \textbf{password}: password dell'account utente
+        \item \textbf{email}: email associata all'account utente
+        \item \textbf{autorizzato}: indica se l'utente è autorizzato o no ad utilizzare il sito
     \end{itemize}
-    \item Aziende
+    \item Tipi\_utente
     \begin{itemize}
-        \item id\_azienda
-        \item denominazione
-        \item password
-        \item email
-    \end{itemize}
-    \item Tutor
-    \begin{itemize}
-        \item id\_tutor
-        \item nome
-        \item cognome
-        \item password
-        \item email
-        \item autorizzato
+        \item \textbf{\underline{ID\_tipoutente}}: chiave primaria
+        \item \textbf{tipo}: tipologia di utente
     \end{itemize}
     
 \end{itemize}
+
+\newpage
 \subsubsection{Associazioni}
 \begin{itemize}
-    \item Rappresenta(Tutor, Aziende)\\*
-    1 Tutor rappresenta 1 Azienda\\*
-    1 Azienda è rappresentata da N tutor
-    \item Segue$_1$(Tutor, Studenti)\\*
-    1 Tutor segue N Studenti\\*
-    1 Studente è seguito da N Tutor
-    \item Segue$_2$(Responsabili, Indirizzi)\\*
-    1 Responsabile segue N Indirizzi\\*
-    1 Indirizzo è seguito da 1 Responsabili
-    \item Riguarda(Classi, Indirizzi)\\*
-    1 Classe riguarda 1 Indirizzo\\*
-    1 Indirizzo è riguardato da N Classi
-    \item Appartiene(Studenti, Classi)\\*
-    1 Studente appartiene ad 1 Classe\\*
-    ad 1 Classe appartengono N Studenti
+    \item Rappresenta(Utenti, Aziende)\\*
+    1 Utente (Referente aziendale) rappresenta 1 Azienda\\*
+    1 Azienda è rappresentata da 1 Utente (Reference aziendale)
+    \begin{figure}[h]
+        \begin{center}
+        \includegraphics[width=11.5cm]{rappresenta.png}
+        \end{center}
+    \end{figure}
+    \item Lavora(Utenti, Aziende)\\*
+    1 Utente (Tutor) lavora per 1 Azienda\\*
+    In 1 Azienda lavorano N Utenti (Tutor)
+    \begin{figure}[h]
+        \begin{center}
+        \includegraphics[width=11.5cm]{lavora.png}
+        \end{center}
+    \end{figure}
+    \item Segue(Utenti, Utenti)\\*
+    1 Utente (Tutor) segue N Utenti (Studenti)\\*
+    1 Utente (Studente) è seguito da N Utente (Tutor)
+    \begin{figure}[h]
+        \begin{center}
+        \includegraphics[width=11.5cm]{segue.png}
+        \end{center}
+    \end{figure}
+    
+    \newpage
+    
+    \item Sovrintende(Utenti, Indirizzi)\\*
+    1 Utente (Docente) segue N Indirizzi\\*
+    1 Indirizzo è seguito da 1 Utenti (Docenti)
+    \begin{figure}[h]
+        \begin{center}
+        \includegraphics[width=11.5cm]{sovrintende.png}
+        \end{center}
+    \end{figure}
+    \item Fa\_parte\_di(Classi, Indirizzi)\\*
+    1 Classe fa parte di 1 Indirizzo\\*
+    Di 1 Indirizzo fanno parte N Classi
+    \begin{figure}[h]
+        \begin{center}
+        \includegraphics[width=11.5cm]{fa_parte_di.png}
+        \end{center}
+    \end{figure}
+    \item Appartiene(Utenti, Classi)\\*
+    1 Utente (Studente) appartiene ad 1 Classe\\*
+    ad 1 Classe appartengono N Utenti (Studenti)
+    \begin{figure}[h]
+        \begin{center}
+        \includegraphics[width=11.5cm]{appartiene.png}
+        \end{center}
+    \end{figure}
+    
+    \newpage
+    
+    \item È(Utenti, Tipi\_utente)\\*
+    1 Utente è di 1 Tipo Utente\\*
+    1 Tipo Utente è di N Utenti
+    \begin{figure}[h]
+        \begin{center}
+        \includegraphics[width=11.5cm]{e.png}
+        \end{center}
+    \end{figure}
     
 \end{itemize}
 
-\subsubsection{Schema ER grezzo}
-\subsubsection{Ristrutturazione schema ER}
-\subsubsection{Schema ER ristrutturato}
+\subsubsection{Vincoli}
+\begin{itemize}
+    \item[] V1: Classi.anno BETWEEN 1 AND 5
+    \item[] V2: ASCII(Classi.sezione) BETWEEN 97 AND 122
+    \item[] V3: Utenti.autorizzato IN (0,1)
+    \item[] V4: segue.data\_inizio $<$= segue.data\_fine
+    \item[] V5: segue.ore\_totali $>$= segue.ore\_assenza
+\end{itemize}
 
+\newpage
+\subsubsection{Schema ER grezzo}
+\begin{figure}[h]
+    \begin{center}
+    \includegraphics[width=13.5cm]{er_grezzo.png}
+    \end{center}
+\end{figure}
+
+\newpage
+\subsubsection{Ristrutturazione schema ER}
+Per completare la ristrutturazione dello schema ER in questo caso è sufficiente ristrutturare l'unica associazione N:M presente: Segue.\\*
+Trattandosi di un associazione N:M, la ristrutturazione avviene trasformando l'associazione in una entità associativa, che chiameremo "Tutoring" che prenderà come chiavi primarie la coppia di chiavi esterne delle due entità da associare (dato che si tratta di un'associazione ricorsiva, in questo caso sono entrambe chiavi dell'entità Utenti).\\*
+Dato che abbiamo ipotizzado che uno studente possa effettuare più esperienze PCTO sotto la supervisione dello stesso tutor, la chiave primaria formata dalle due chiavi esterne non è sufficiente, pertanto aggiungiamo anche l'attributo data\_inizio alla chiave primaria.
+\subsubsection{Schema ER ristrutturato}
+\begin{figure}[h]
+    \begin{center}
+    \includegraphics[width=13.5cm]{er_completo.png}
+    \end{center}
+\end{figure}
+
+\newpage
 \subsection{Progettazione logica}
 \subsubsection{Schema logico}
-\subsubsection{Verifica normalizzazione}
+\begin{itemize}
+    \item Utenti(ID\_utente(pk), nome, cognome, password, email, autorizzato, id\_azienda(fk), id\_classe(fk), tipo\_utente(fk))
+    \item Tutoring([id\_tutor(fk),id\_studente(fk), data\_inizio](pk), data\_fine, ore\_totali, ore\_assenza, valutazione)
+    \item Tipi\_utente(ID\_tipoutente(pk), tipo)
+    \item Aziende(ID\_azienda(pk), denominazione, percorso\_doc, referente(fk))
+    \item Indirizzi(sigla(pk), nome, sovrintendente(fk))
+    \item Classi(ID\_classe(pk), anno, sezione, indirizzo(fk))
+    
+\end{itemize}
 \subsubsection{Tracciato record}
+\begin{center}
+    \begin{tabular}{|p{3.0cm}||p{1.6cm}|p{2cm}|p{2.5cm}|p{1cm}|}
+        \hline
+        \multicolumn{5}{|c|}{Utenti} \\
+        \hline
+        Campo & Tipo & Dimensione & Valore & Note \\
+        \hline
+        ID\_utente & Numerico & 8 & autoincrement & pk \\
+        \hline
+        nome & Varchar & 30 & not null & \\
+        \hline
+        cognome & Varchar & 30  & not null & \\
+        \hline
+        password & Varchar & 128 & not null & \\
+        \hline
+        email & Varchar & 50 & not null & \\
+        \hline
+        autorizzato & Tinyint & 1 & not null &\\
+        \hline
+        id\_azienda & Numerico & 8 & & fk \\
+        \hline
+        id\_classe & Numerico  & 8 & & fk \\
+        \hline
+        tipo\_utente & Numerico & 8 & not null  & fk\\
+        \hline
+    \end{tabular}
+    
+    \bigskip
+    \begin{tabular}{|p{3.0cm}||p{1.6cm}|p{2cm}|p{2.5cm}|p{1cm}|}
+        \hline
+        \multicolumn{5}{|c|}{Tutoring} \\
+        \hline
+        Campo & Tipo & Dimensione & Valore & Note \\
+        \hline
+        id\_tutor & Numerico & 8 & not null & pk-fk \\
+        \hline
+        id\_studente & Numerico & 8 & not null & pk-fk \\
+        \hline
+        data\_inizio & Data & -  & not null & pk\\
+        \hline
+        data\_fine & Data & -  & not null & \\
+        \hline
+        ore\_totali & Numerico & 8 & not null & \\
+        \hline
+        ore\_assenza & Numerico  & 8 & not null &\\
+        \hline
+        valutazione & Varchar & 512 &  & \\
+        \hline
+    \end{tabular}
+    
+    \bigskip
+    \begin{tabular}{|p{3.0cm}||p{1.6cm}|p{2cm}|p{2.5cm}|p{1cm}|}
+        \hline
+        \multicolumn{5}{|c|}{Tipi\_utente} \\
+        \hline
+        Campo & Tipo & Dimensione & Valore & Note \\
+        \hline
+        ID\_tipoutente & Numerico & 8 & autoincrement & pk \\
+        \hline
+        tipo & Varchar & 30 & not null &  \\
+        \hline
+    \end{tabular}
+    
+    \bigskip
+    \begin{tabular}{|p{3.0cm}||p{1.6cm}|p{2cm}|p{2.5cm}|p{1cm}|}
+        \hline
+        \multicolumn{5}{|c|}{Aziende} \\
+        \hline
+        Campo & Tipo & Dimensione & Valore & Note \\
+        \hline
+        ID\_azienda & Numerico & 8 & autoincrement & pk \\
+        \hline
+        denominazione & Varchar & 50 & not null &  \\
+        \hline
+        percorso\_doc & Varchar & 50 &  &  \\
+        \hline
+        referente & Numerico & 8 & not null & fk \\
+        \hline
+    \end{tabular}
+    
+    \bigskip
+    \begin{tabular}{|p{3.0cm}||p{1.6cm}|p{2cm}|p{2.5cm}|p{1cm}|}
+        \hline
+        \multicolumn{5}{|c|}{Indirizzi} \\
+        \hline
+        Campo & Tipo & Dimensione & Valore & Note \\
+        \hline
+        sigla & Varchar & 10 & not null & pk \\
+        \hline
+        nome & Varchar & 30 & not null &  \\
+        \hline
+        sovrintendente & Numerico & 8 & not null & fk \\
+        \hline
+    \end{tabular}
+    
+    \bigskip
+    \begin{tabular}{|p{3.0cm}||p{1.6cm}|p{2cm}|p{2.5cm}|p{1cm}|}
+        \hline
+        \multicolumn{5}{|c|}{Classi} \\
+        \hline
+        Campo & Tipo & Dimensione & Valore & Note \\
+        \hline
+        ID\_classe & Numerico & 8 & autoincrement & pk \\
+        \hline
+        anno & Numerico & 8 & not null &  \\
+        \hline
+        sezione & Varchar & 4 & not null &  \\
+        \hline
+        indirizo & Varchar & 10 & not null & fk \\
+        \hline
+    \end{tabular}
+\end{center}
 
+\newpage
 \subsection{Progettazione fisica}
+Passiamo ora alla realizzazione effettiva del Database. Per il progetto utilizzeremo il DBMS MySQL.
 \subsubsection{Creazione tabelle MySQL}
-\subsubsection{Implementazione vincoli}
+Iniziamo creando le singole tabelle senza esplicitare le chiavi esterne.
+\paragraph{Utenti}
+\begin{verbatim}
+    CREATE TABLE `Utenti` (
+    		    `ID_utente` int(8) NOT NULL AUTO_INCREMENT,
+        		`nome` varchar(30) NOT NULL,
+        		`cognome` varchar(30) NOT NULL,
+        		`password` varchar(128) NOT NULL,
+        		`email` varchar(50) NOT NULL,
+        		`autorizzato` tinyint(1) NOT NULL,
+        		`id_azienda` int(8) DEFAULT NULL,
+        		`id_classe` int(8) DEFAULT NULL,
+        		`tipo_utente` int(8) NOT NULL,
+        		PRIMARY KEY (`ID_utente`),
+        		
+        		CHECK (`autorizzato` IN (0,1)),
+    ) ENGINE=InnoDB;
+\end{verbatim}
 
+\newpage
+\paragraph{Aziende}
+\begin{verbatim}
+    CREATE TABLE `Aziende` (
+        		`ID_azienda` int(8) NOT NULL AUTO_INCREMENT,
+        		`denominazione` varchar(50) NOT NULL,
+        		`referente` int(8) NOT NULL,
+        		`percorso_doc` varchar(50),
+        		PRIMARY KEY (`ID_azienda`)
+    ) ENGINE=InnoDB;
+\end{verbatim}
+
+\paragraph{Classi}
+\begin{verbatim}
+    CREATE TABLE `Classi` (
+        		`ID_classe` int(8) NOT NULL AUTO_INCREMENT,
+        		`anno` int(11) NOT NULL,
+        		`sezione` varchar(4) NOT NULL,
+        		`indirizzo` varchar(10) NOT NULL,
+        		PRIMARY KEY (`ID_classe`),
+        		
+        		CHECK (ASCII(`sezione`) BETWEEN 97 AND 122),
+        		CHECK (`anno` BETWEEN 1 AND 5)
+	    ) ENGINE=InnoDB;
+\end{verbatim}
+
+\paragraph{Indirizzi}
+\begin{verbatim}
+    CREATE TABLE `Indirizzi` (
+        		`sigla` varchar(10) NOT NULL,
+        		`nome` varchar(30) NOT NULL,
+        		`sovrintendente` int(8) NOT NULL,
+        		PRIMARY KEY (`sigla`)
+	    ) ENGINE=InnoDB;    
+\end{verbatim}
+
+\paragraph{Tipi\_utente}
+\begin{verbatim}
+    CREATE TABLE `Tipi_utente` (
+        		`ID_tipoutente` int(8) NOT NULL AUTO_INCREMENT,
+        		`tipo` varchar(30) NOT NULL,
+        		PRIMARY KEY (`ID_tipoutente`)
+	    ) ENGINE=InnoDB;
+\end{verbatim}
+
+\newpage
+\paragraph{Tutoring}
+\begin{verbatim}
+    CREATE TABLE `Tutoring` (
+        		`id_tutor` int(8) NOT NULL,
+        		`id_studente` int(8) NOT NULL,
+        		`data_inizio` date NOT NULL,
+        		`data_fine` date NOT NULL,
+        		`ore_totali` int(8),
+        		`ore_assenza` int(8),
+        		`valutazione` varchar(512),
+        		PRIMARY KEY (`id_tutor`,`id_studente`, `data_inizio`),
+        		
+        		CHECK (data_inizio <= data_fine),
+        		CHECK (ore_totali >= ore_assenza)
+    	) ENGINE=InnoDB;
+\end{verbatim}
+\subsubsection{Creazione chiavi esterne}
+Ora che abbiamo creato le tabelle possiamo aggiungere le chaivi esterne.
+\paragraph{Utenti}
+\begin{verbatim}
+ ADD FOREIGN KEY (`id_azienda`) REFERENCES `Aziende` (`ID_azienda`),
+ ADD FOREIGN KEY (`id_classe`) REFERENCES `Classi` (`ID_classe`),
+ ADD FOREIGN KEY (`tipo_utente`) REFERENCES `Tipi_utente` (`ID_tipoutente`);
+\end{verbatim}
+
+
+\paragraph{Aziende}
+\begin{verbatim}
+ ALTER TABLE `Aziende`
+ ADD FOREIGN KEY (`referente`) REFERENCES `Utenti` (`ID_utente`);
+\end{verbatim}
+
+\paragraph{Classi}
+\begin{verbatim}
+ ALTER TABLE `Classi`
+ ADD FOREIGN KEY (`indirizzo`) REFERENCES `Indirizzi` (`sigla`);
+\end{verbatim}
+
+\paragraph{Indirizzi}
+\begin{verbatim}
+ ALTER TABLE `Indirizzi`
+ ADD FOREIGN KEY (`sovrintendente`) REFERENCES `Utenti` (`ID_utente`);
+\end{verbatim}
+
+\paragraph{Tutoring}
+\begin{verbatim}
+ ALTER TABLE `Tutoring`
+ ADD FOREIGN KEY (`id_tutor`) REFERENCES `Utenti` (`ID_utente`),
+ ADD FOREIGN KEY (`id_studente`) REFERENCES `Utenti` (`ID_utente`);
+\end{verbatim}
+
+\newpage
+\subsubsection{Popolamento tabelle}
+Alcune tabelle del sistema necessitano un popolamento in fase di installazione del database.
+\paragraph{Tipi\_utente} Questa tabella contiene campi default, che quindi dobbiamo inserire in fase di installazione del database.
+\begin{verbatim}
+ INSERT INTO Tipi_utente(tipo)
+ VALUES  ('Amministratore'),
+         ('Studente'),
+         ('Referente'),
+         ('Tutor'),
+         ('Docente');
+\end{verbatim}
+
+\paragraph{Utenti} Dobbiamo inserire il primo utente, un admin. \$adminmain e \$adminpassword sono due variabili settabili nel file \textit{config.php}. Notare che il sistema si aspetta una password già hashata con sha512.
+\begin{verbatim}
+ INSERT INTO Utenti(nome, cognome, password, email, autorizzato, tipo_utente)
+ VALUES  ('Admin','Admin', '$adminpassword', '$adminmail', '1', '1');
+\end{verbatim}
+
+\newpage
 \section{Interfaccia Web}
 \subsection{Installazione Database}
+Con i file dell'applicativo, viene anche fornito un file che permette l'installazione del suo database direttamente da browser.\\*
+Il file in questione si chiama \textit{installdb.php} e creerà il database a seconda delle impostazioni presenti all'interno del file \textit{config.php}. Le impostazioni permettono di decidere se creare o meno il database (in questo secondo caso ci si aspetta di avere già il database creato), inserire le credenziali dell'utente del database e quelle del primo utente da registrare, impostare una password per l'installazione del database (il sistema interpreterà la stringa inserita come un digest dell'algoritmo sha512) e indicare la macchina su cui risiede il database.
+Una volta sistemate le impostazioni nel file di configurazione, sarà possibile avviare l'installazione aprendo nel browser il file \textit{installdb.php} e inserendo la password per l'installazione (quella di default è "12345", ma si suggerisce di cambiarla).
+\begin{center}
+    \includegraphics[width=15.5cm]{install.PNG}
+\end{center}
+Qualora l'installazione dovesse essere andata a buon fine, il sistema lo comunicherà con una serie di messaggi di successo.
+\begin{center}
+    \includegraphics[width=15.5cm]{install_succ.PNG}
+\end{center}
+Se invece fossero stati rilevati degli errori durante l'installazione, la procedura verrà interrotta al primo di questi e verrà riportato un messaggio che precisa quale parte dell'installazione abbia riscontrato problemi e anche il messaggio di errore del sistema.
+\begin{center}
+    \includegraphics[width=15.5cm]{install_error.PNG}
+\end{center}
+
+
+\subsection{File}
+\begin{tabular}{|p{4.5cm}|p{4.0cm}|p{6.3cm}|}
+    
+    \hline
+    File & Possono accedere & Descrizione \\
+    \hline
+    \hline
+    class.php & Docenti, Amministratori & Permette di vedere la lista degli studenti di una classe \\
+    \hline
+    classinsertion.php & Amministratori & Permette di inserire un classe\\
+    \hline
+    classmanagement.php & Amministratori & Permette di vedere e modificare i dati delle classi\\
+    \hline
+    config.php & Nessuno & Contiene delle opzioni e dei dati utili per l'installazione e l'accesso al database\\
+    \hline
+    coursemanagement.php & Amministratori & Permette di vedere e modificare i dati degli indirizzi\\
+    \hline
+    getselects.php & Nessuno & Pagina atta a rispondere a richieste http da parte delle altre pagine\\
+    \hline
+    gettables.php & Nessuno & Pagina atta a rispondere a richieste http da parte delle altre pagine\\
+    \hline
+    index.php & Utenti non loggati & Permette unicamente il login al portale\\
+    \hline
+    installdb & Tutti & Permette, fornita la password corretta, di procede all'installazione di database e tabelle\\
+    \hline 
+    myclasses.php & Docenti & Permette di vedere una lista delle classi che si sovrintende\\
+    \hline
+    profile.php & Tutti & Permette di vedere i propri dati o quelli di altri (non tutti gli utenti possono accedere al profilo di tutti)\\
+    \hline
+    siteinsertion.php & Amministratori & Permette di registrare una azienda\\
+    \hline
+    sitemanagement.php & Amministratori & Permette di vedere una lista delle aziende e di caricare la documentazione\\
+    \hline
+    style.css & Nessuno & Definisce la componente grafica del sito\\
+    \hline
+    tutoringinsertion.php & Amministratori & Permette di inserire un'attività PCTO\\
+    \hline
+    tutoringmanagement.php & Amministratore & Permette di vedere una lista di tutte le attività PCTO\\
+    \hline
+    userinsertion.php & Amministratore, Referente & Permette di inserire un utente nel sito (per forza un tutor nel caso del referente)\\
+    \hline
+    usermanagement.php & Amministratore, Referente & Permette di vedere una lista di tutti gli utenti (solo dei tutor dell'azienda, nel caso del referente) e accedere ai loro profili\\
+    \hline
+\end{tabular}
+
 \subsection{Utenti}
+Nel momento in cui l'applicativo è attivo, è possibile accedervi. Accedendo tramite browser a qualsiasi pagina, se non 
+si è effettuato il login, si verrà immediatamente portati nella pagina \textit{index.php}. Questa pagina permette unicamente l'operazione di login, infatti una volta che ha effettuato l'accesso, un utente non potrà più accedere a questa pagina a meno che non effettui il logout prima.
+\begin{center}
+    \includegraphics[width=15.5cm]{login.PNG}
+\end{center}
+La pagina di base di un utente che ha effettuato l'accesso sarà quella del suo prifilo utente. Sarà poi possibile raggiungere le eventuali altre pagine tramite una navbar.
+\begin{center}
+    \includegraphics[width=15.5cm]{profile.PNG}
+\end{center}
+Ogni utente che ha effettuato l'accesso, in altro a destra nella navbar, potrà visionare un pulsante recante il nome e cognome. Il click su questo pulsante apre un menù a tendina che permette di effettuare il logout.
+\begin{center}
+    \includegraphics[width=15.5cm]{logout.PNG}
+\end{center}
+Non è prevista la possibilità di effettuare la registrazione: gli amministratori inseriscono i dati degli utenti e il sistema genererà una password randomica che poi verrà inviata per email all'interessato. Il sistema non prevede la possibilità di cambiare la password, per evitare che un utente inserisca una password troppo debole che comprometta la sicurezza del sistema.
+In fase di inserimento, l'amministratore selezionerà un tipo utente in base al quale varierà il range di operazioni ammesse e i dati a cui l'utente potrà accedere. In seguito verranno illustrate le operazioni eseguibili da ogni tipo di utente.
+
+
+
+
+
+
+\newpage
 \subsubsection{Amministratore}
-\subsubsection{Aziende}
-\subsubsection{Docenti}
+L'Amministratore ha accesso a tutti i dati e a tutti i profili utente memorizzati nel database.\\*
+È l'unico utente che può inserire tutti gli altri utenti, modificare tutti i dati, creare le associazioni tutor-studente, inserire le aziende, autorizzare e togliere l'autorizzazione agli account e caricare la documentazione per la collaborazione scuola-azienda.\\*
+La navbar dell'Amministratore si presenta così:
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_amministratore.PNG}
+\end{center}
+\bigskip
+\paragraph{Home} è un link alla pagina \textit{profile.php} e porta al profilo utente che è infatti la pagina di default.\\*
+La pagina profilo di un amministratore può essere visionata solo da altri amministratori e non contiene nessun dato se non quelli di registrazione dell'utente.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_home.PNG}
+\end{center}
+\bigskip
+\paragraph{Gestione Utenti} rappresenta un menù che permette di accedere a due pagine relative alla gestione degli utenti.
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_amministratore_gestione-utenti.PNG}
+\end{center}
+\subparagraph{Visualizza Utenti} è un link alla pagina \textit{usermanagement.php}, che permette di visionare una lista di tutti gli utenti che sono stati registrati al portale e tutti i relativi dati.\\*
+La pagina presenta anche la possibilità di filtrare gli utenti per tipo.\\*
 
-\subsection{Pagine}
-\subsubsection{Amministrazione}
-\subsubsection{Aziende}
-\subsubsection{Docenti}
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_visualizza-utenti.PNG}
+\end{center}
 
-\section{Sicurezza dei dati????}
+Cliccando su un utente della lista è possibile accedere al suo profilo.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_profexample.PNG}
+\end{center}
+
+Dalla pagina del profilo di qualsiasi utente l'admin può togliere o attribuire l'autorizzazione cliccando sul tasto "Annulla autorizzazione"/"Autorizza".\\*
+Da questa pagina è anche possibile modificare o eliminare l'utente, cliccando sul pulsante "Modifica dati".
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_modifica-utente.PNG}
+\end{center}
+A questo punto, cliccando sul tasto "Conferma modifiche" verrano salvate nel database le modifiche apportate ai dati dell'utente, cliccando sul tasto "Cancella utente" l'utente verrà rimosso dal database, cliccando su "Annulla" il popup verrà chiuso e nessuna modifica sarà salvata.
+
+\subparagraph{Inserisci Utente} è un link alla pagina \textit{userinsertion.php}, che permette di inserire un altro utente, specificandone il tipo, il nome, il cognome e l'Email. Alcuni tipi utente prevedono degli input extra: per i tutor è necessario specificare l'azienda per cui lavorano, mentre per gli studenti è necessario specificare la classe a cui appartengono.\\*
+L'utente registrato riceverà per email la password generata randomicamente dal sistema.\\*
+Di default l'utente registrato dall'amministratore sarà impostato come "autorizzato". Tuttavia l'amministratore può comunque togliere questa autorizzazione tramite il profilo dell'utente.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_inserisci-utente.PNG}
+\end{center}
+\bigskip
+
+
+\paragraph{Gestione Aziende} rappresenta un menù che permette di accedere a due pagine relative alla gestione delle aziende.
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_amministratore_gestione-aziende.PNG}
+\end{center}
+
+\subparagraph{Visualizza Aziende} è un link alla pagina \textit{sitemanagement.php}, che permette di visionare una lista di tutte le aziende che sono state registrate al portale e i relativi dati (compreso il referente).\\*
+La pagina permette anche di scaricare la documentazione relativa alla collaborazione con una determinata azienda oppure di caricarla.\\*
+Il click sul campo "Referente" della tabella comporta il reindirizzamento alla pagina del profilo del referente.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_visualizza-aziende.PNG}
+\end{center}
+
+
+\subparagraph{Inserisci Azienda} è un link alla pagina \textit{siteinsertion.php}, che permette di inserire un'azienda all'interno del sistema. Per inserire un'azienda è sufficiente fornire una denominazione e un refente già precedentemente registrato. Attenzione: non è possibile attribuire un Referente a due aziende diverse.\\*
+La documentazione può essere caricata in un secondo momento.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_inserisci-azienda.PNG}
+\end{center}
+\bigskip
+
+\paragraph{Gestione Indirizzi} è un link alla pagina \textit{coursemanagement.php}, che permette di visualizzare e modificare i dati relativi agli indirizzi e anche aggiungerne di nuovi.\\*
+
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_visualizza-indirizzi.PNG}
+\end{center}
+Per creare un nuovo indirizzo è sufficiente cliccare sul pulsante "Aggiungi"
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_es-indirizzo.PNG}
+\end{center}
+La creazione di un indirizzo prevede l'assegnazione di una sigla (che deve essere univoca per ogni indirizzo), un nome esteso e un sovrintendente, che deve essere un docente precedentemente registrato. In questo caso più indirizzi possono essere assegnati a un docente. Cliccando nuovamente sul tasto "Aggiunti", l'indirizzo sarà inserito nel sistema.\\*
+Per modificare un indirizzo è sufficiente premere il relativo tasto "Modifica", posto sulla destra del record. Questo comporterà l'apertura di un popup.
+
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_mod-indirizzo.PNG}
+\end{center}
+A questo punto è possibile modificare i dati dell'indirizzo e salvare le modifiche nel database mediante il tasto "Conferma modifiche". Il tasto "Cancella Indirizzo" comporterà invece l'eliminazione dell'indirizzo dal database.\\*
+Premendo il tasto "Annulla" il popup verrà chiuso e nessuna delle modifiche apportate sarà salvata.
+\bigskip
+
+
+\paragraph{Gestione Classi} rappresenta un menù che permette di accedere a due pagine relative alla gestione della classi.
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_amministratore_gestione-classi.PNG}
+\end{center}
+
+
+\subparagraph{Visualizza Classi} è un link alla pagina \textit{classmanagement.php}, che permette di visionare e modificare i dati delle classi o, eventualmente, anche eliminarle.\\*
+La pagina permette di filtrare le classi per indirizzo.\\*
+Il click sul campo "sovrintendente" della tabella porterà alla pagina del profilo del docente che sovrintende l'indirizzo di cui la classe fa parte.\\*
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_visualizza-classi.PNG}
+\end{center}
+Per modificare i dati di una classe è possibile cliccare sul tasto "Modifica" corrispondente alla classe che si vuole modificare. Il click comporterà l'apertura di un popup.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_mod-classe.PNG}
+\end{center}
+A questo punto è possibile modificare i dati della classe e salvare le modifiche nel database mediante il tasto "Conferma modifiche". Il tasto "Cancella classe" comporterà invece l'eliminazione della classe dal database.\\*
+Premendo il tasto "Annulla" il popup verrà chiuso e nessuna delle modifiche apportate sarà salvata.\\*
+Il click sul campo "N. Studenti" della tabella porterà ad una pagina che riporta in tabella tutti gli studenti di quella classe.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_classe.PNG}
+\end{center}
+
+\subparagraph{Inserisci Classe} è un link alla pagina \textit{classinsertion.php}, che permette di inserire una nuova classe nel sistema.\\*
+Per l'inserimento di una classe sono richiesti un anno scolastico (da 1 a 5) e un indirizzo (tra quelli già nel sistema). La sezione della classe sarà calcolata automaticamente dal sistema in base al numero di classi con lo stesso anno e indirizzo.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_inserisci-classe.PNG}
+\end{center}
+\bigskip
+
+\paragraph{Gestione Tutoring} rappresenta un menù che permette di accedere a due pagine relative alla gestione delle attività di tutoring.
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_amministratore_gestione-tutoring.PNG}
+\end{center}
+
+\subparagraph{Visualizza Tutoring} è un link alla pagina \textit{tutoringmanagement.php}, che permette di visionare una lista di tutte le attività di tutoring e i relativi dati: Azienda, Tutor, Studente (e relativa classe), Data di inizio, Data di fine, ore totali e ore di assenza.\\*
+La pagina permette anche di modificare o eliminare eventualmente un'attività di tutoring registrata.\\*
+Per facilitare la ricerca di una specifica attività di tutoring, è possibile filtrare per Azienda, Tutor, Indirizzo, Classe e studente.\\*
+Il click sul campo "Azienda" della tabella porterà alla pagina del profilo del referente dell'azienda (che riporta anche informazioni relative all'azienda).\\*
+Il click sul campo "Tutor" della tabella porterà alla pagina del profilo del tutor.\\*
+Il click sul campo "Studente" della tabella porterà alla pagina del profilo dello studente.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_visualizza-tutoring.PNG}
+\end{center}
+
+Per modificare i dati di un'attività di tutoring/PCTO è possibile cliccare sul tasto "Modifica" relativo al record che si vuole modificare. Questo comporterà l'apertura di un popup.
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_mod-tutoring.PNG}
+\end{center}
+
+A questo punto è possibile modificare i dati del tutoring e salvare le modifiche nel database mediante il tasto "Conferma modifiche". Il tasto "Cancella tutoring" comporterà invece l'eliminazione del record dal database.\\*
+Premendo il tasto "Annulla" il popup verrà chiuso e nessuna delle modifiche apportate sarà salvata.
+
+
+\subparagraph{Inserisci Tutoring} è un link alla pagina \textit{tutoringinsertion.php}, che permette di registrare un'attività di tutoring.\\*
+Per l'inserimento di un'attività di tutoring sono richiesti un tutor, uno studente, una data di inizio, una data di fine, il numero di ore totali e il numero di ore di assenza.
+
+\begin{center}
+    \includegraphics[width=15.5cm]{admin_inserisci-tutoring.PNG}
+\end{center}
+
+
+
+
+\newpage
+\subsubsection{Referente}
+Il referente rappresenta un'azienda, pertanto ha accesso alla documentazione che regolamenta la collaborazione con la scuola e a tutti i dati circa le attività di tutoring svolte presso la sua azienda.\\*
+Può infatti accedere ai profili degli studenti e vedere tutte le attività di PCTO svolte con tutor che lavorano presso la sua azienda. Inoltre può accedere anche ai profili di suddetti tutor per visualizzarne tutte le attività di tutoring.\\*
+Il referente è l'unico tipo di utente oltre agli amministratori che può inserire altri utenti, infatti il referente può inserire dei tutor che, a differenza di quelli inseriti dall'amministratore, necessiteranno dell'autorizzazione (fornita da un amministratore) prima di poter accedere al portale.
+La sua navbar si presenta così:
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_referente.PNG}
+\end{center}
+\bigskip
+
+\paragraph{Home} è un link alla pagina \textit{profile.php} e porta al profilo utente che è infatti la pagina di default.\\*
+La pagina di profilo di un referente può essere visionata solo dagli amministratori. In questa pagina, oltre ai dati del referente, ci sono anche i dati dell'azienda che rappresenta, comprese quindi tutte le attività di PCTO che si sono state effettuate.
+\begin{center}
+    \includegraphics[width=15.5cm]{referente_home.PNG}
+\end{center}
+Cliccando sul campo "Studente" di una delle attività di tutoring, si verrà reindirizzati alla pagina del profilo dello studente, dove il referente può vedere, oltre ai dati dello studente, tutte le attività di PCTO svolte presso l'azienda che rappresenta.
+\begin{center}
+    \includegraphics[width=15.5cm]{referente_prof-stud.PNG}
+\end{center}
+\bigskip
+
+\paragraph{Gestione Tutor} rappresenta un menù che permette di accedere a due pagine relative alla gestione dei tutor.
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_referente_gestione-tutor.PNG}
+\end{center}
+
+\subparagraph{Visualizza Tutor}  è un link alla pagina \textit{usermanagement.php} che, nel caso del referente, permette di visionare una lista di tutti i tutor che sono stati registrati al portale (sia da lui che dall'amministratore) e tutti i relativi dati.
+\begin{center}
+    \includegraphics[width=15.5cm]{referente_gestione-tutor.PNG}
+\end{center}
+Cliccando su un tutor della lista è possibile accedere al suo profilo per visionare ulteriori dati.
+\begin{center}
+    \includegraphics[width=15.5cm]{referente_prof-tutor.PNG}
+\end{center}
+Cliccando sul campo "Studente" di una delle attività di tutoring, è possibile accedere al profilo dello studente e visualizzare tutte le attività che questo studente ha svolto presso l'azienda che il referente rappresenta.
+\begin{center}
+    \includegraphics[width=15.5cm]{referente_prof-stud.PNG}
+\end{center}
+
+\subparagraph{Inserisci Tutor} è un link alla pagina \textit{userinsertion.php} che, se l'utente è un referente, permette di inserire un altro tutor, specificandone il nome, il cognome e l'Email. \\*
+Il tutor registrato riceverà per email la password generata randomicamente dal sistema.\\*
+Di default il tutor registrato dal referente sarà impostato come "non autorizzato" finché un amministratore non validerà i dati e deciderà di autorizzarlo.
+\begin{center}
+    \includegraphics[width=15.5cm]{referente_inserisci-tutor.PNG}
+\end{center}
+\bigskip
+
+
+
+
+
+\subsubsection{Docente}
+Il docente è la figura incaricata di presidiare uno o più indirizzi (qualora non venisse associato a nessun indirizzo non potrebbe effettuare alcuna operazione se non visionare il proprio profilo). Può visionare i profili degli studenti la cui classe rientra in uno degli indirizzi che presidia. In questi profili può visualizzare tutte le attività di tutoring svolte e potrà anche effettuare la valutazione dell'attività di PCTO.\\*
+La sua navbar si presenta così:
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_docente.PNG}
+\end{center}
+\bigskip
+
+\paragraph{Home} è un link alla pagina \textit{profile.php} e porta al profilo utente che è infatti la pagina di default.\\*
+La pagina di profilo del docente può essere visionata solo dagli amministratori, che possono vedere gli indirizzi che il docente sovrintende.
+\begin{center}
+    \includegraphics[width=15.5cm]{docente_home.PNG}
+\end{center}
+
+\paragraph{Le mie classi} è un link alla pagina \textit{myclasses.php} che permette al docente di vedere una lista di tutte le classi che rientrano negli indirizzi che sovrintende. La pagina permette anche di filtrare le classi per indirizzo.
+
+\begin{center}
+    \includegraphics[width=15.5cm]{docente_myclasses.PNG}
+\end{center}
+
+\noindent
+Cliccando su una delle classi proposte verrà aperta una pagina recante una tabella che riporta una lista di tutti gli studenti che appartengono alla classe. \begin{center}
+    \includegraphics[width=15.5cm]{docente_class.PNG}
+\end{center}
+
+Cliccando su uno degli studenti il docente potrà visualizzare la pagina del profilo dello studente, dove potrà vedere una tabella di tutte le attività di PCTO svolte. 
+\begin{center}
+    \includegraphics[width=15.5cm]{docente_prof-stud.PNG}
+\end{center}
+Cliccando sul campo "Azienda" di uno dei record, potrà visualizzare la documentazione di collaborazione azienda-scuola.\\*
+Cliccando sul pulsante "Visualizza/modifica valutazione" di una attività di PCTO in particolare comparità un popup che permettà al docente di visualizzare e modificare la valutazione dell'attività. 
+\begin{center}
+    \includegraphics[width=15.5cm]{docente_valutazione.PNG} 
+\end{center}
+A questo punto cliccando sul tasto "Modifica" si salvano nel database le modifiche alla valutazione, mentre premendo il tasto annulla si chiude il popup senza salvare alcuna modifica.\\*
+Qualora il pulsante "Visualizza/modifica valutazione" dovesse mancare, significa che l'attività di PCTO è ancora in corso, o comunque non è ancora finita, quindi non è ancora possibile inserire la valutazione.
+\newpage
+\subsubsection{Tutor}
+Il tutor ha un accesso limitato alle sue attività di tutoring svolte. Può inoltre accedere ai profili degli studenti che ha seguito, che sta seguendo e che seguirà in attività di PCTO e visionare le tutte le attività che lo riguardano.
+La sua navbar si presenta così:
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_studente.PNG}
+\end{center}
+\bigskip
+
+\paragraph{Home} è un link alla pagina \textit{profile.php} e porta al profilo utente che è infatti la pagina di default.
+Nella propria pagina del profilo, il tutor potrà visualizzare tutte le attività di tutoring svolte.
+\begin{center}
+    \includegraphics[width=15.5cm]{tutor_home.PNG} 
+\end{center}
+Cliccando sul campo "Studente" di una di queste attività, potrà raggiungere il profilo dello studente relativo all'attività di tutoring. Nella pagina di profilo di uno studente il tutor può vedere una tabella che riporta la lista di tutte le attività di PCTO svolte dallo studente e seguite dal tutor stesso.
+\begin{center}
+    \includegraphics[width=15.5cm]{tutor_prof-stud.PNG} 
+\end{center}
+La pagina di profilo di tutor può essere visionata da amministratori (che possono visualizzare tutte le attività di tutoring svolte), referenti (che possono visualizzare tutte le attività, a patto che il tutor lavori per la loro azienda) e studenti (che possono visualizzare le attività che li coinvolgono).
+
+\subsubsection{Studente}
+Lo studente ha un accesso limitato alle sue attività di tirocinio svolte. Può inoltre accedere al profilo del docente che sovrintende il suo indirizzo di studi (per reperire un contatto) e al profilo di ogni tutor che l'ha seguito in attività di PCTO, nel quale può vedere tutti i dati relativi alle attività di PCTO che lo riguardano.
+La sua navbar si presenta così:
+\begin{center}
+    \includegraphics[width=15.5cm]{navbar_studente.PNG}
+\end{center}
+\bigskip
+\paragraph{Home}  è un link alla pagina \textit{profile.php} e porta al profilo utente che è infatti la pagina di default.\\*
+Nel proprio profilo lo studente può vedere una tabella che riporta tutte le attività di PCTO svolte.
+\begin{center}
+    \includegraphics[width=15.5cm]{studente_home.PNG}
+\end{center}
+Cliccando sul campo "Tutor" di una di queste attività, potrà accedere al profilo del tutor che l'ha seguito e visualizzare tutte le attività che lo riguardano seguite da quel tutor in particolare.
+\begin{center}
+    \includegraphics[width=15.5cm]{studente_prof-tutor.PNG}
+\end{center}
+Sempre nella pagina dello studente è presenta la voce "Docente di riferimento", che però è visualizzabile solo dallo studente stesso.
+Il click sul link corrispondente porta alla pagina del profilo del docente che sovrintende l'indirizzo di studi dello studente.
+\begin{center}
+    \includegraphics[width=15.5cm]{studente_prof-docente.PNG}
+\end{center}
+La pagina profilo di uno studente può essere visionata da amministratori (che possono visualizzare tutte le attività di PCTO svolte dallo studente), referenti (che possono visualizzare tutte le attività di PCTO svolte presso l'azienda che rappresentano), tutor (che possono visualizzre tutte le attività di PCTO svolte sotto la loro supervisione) e docenti (che possono vedere tutte le attività di PCTO)
+
+\newpage
+\subsection{Query di selezione, modifica, inserimento ed eliminazione}
+Per ottenere il Tipo dell'utente correntemente loggato:
+\begin{verbatim}
+                "SELECT T.tipo
+                FROM Utenti U INNER JOIN Tipi_utente T 
+                ON U.tipo_utente  = T.ID_tipoutente 
+                WHERE U.ID_utente = ".$_SESSION["userid"]    
+\end{verbatim}
+\\*Per sapere se l'utente correntemente loggato è il sovrintendente dell'indirizzo della classe \$class:
+\begin{verbatim}
+                "SELECT * 
+                FROM Classi C INNER JOIN Indirizzi I 
+                ON C.indirizzo = I.sigla WHERE 
+                C.ID_classe='$class' 
+                AND I.sovrintendente = '".$_SESSION["userid"]."'"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutti gli studenti di una classe:
+\begin{verbatim}
+                "SELECT * 
+                FROM Utenti
+                WHERE id_classe = $class"
+\end{verbatim}      
+
+\\*
+\noindent
+Per ottenere i dati degli indirizzi ordinati per sigla:
+\begin{verbatim}   
+                "SELECT * 
+                FROM  Indirizzi
+                ORDER BY sigla"
+\end{verbatim}
+
+\\*
+\noindent
+Per modificare una classe con i dati passati con POST:
+\begin{verbatim}
+                "UPDATE Classi 
+                SET anno = '".$_POST["anno"]."',
+                sezione = '".$_POST["sezione"]."',
+                indirizzo = '".$_POST["indirizzo"]."'
+                WHERE ID_classe = '".$_POST["class"]."'"
+\end{verbatim}
+
+\\*
+\noindent
+Per eliminare una classe passata per POST:
+\begin{verbatim}
+                "DELETE FROM Classi 
+                WHERE ID_classe = '".$_POST["class"]."'"
+\end{verbatim}
+
+\\*
+\noindent
+Per inserire un indirizzo:
+\begin{verbatim}
+                "INSERT INTO Indirizzi (sigla, nome, sovrintendente)
+                VALUES('$course','$course_name','$course_supervisor')";
+\end{verbatim}
+
+\\*
+\newpage
+\noindent
+Per modificare i dati di un indirizzo:
+\begin{verbatim}
+                "UPDATE Indirizzi 
+                SET nome = '".$_POST["nome"]."',
+                sovrintendente = '".$_POST["sovrintendente"]."'
+                WHERE sigla = '".$_POST["course"]."'"
+\end{verbatim}
+
+\\*
+\noindent
+Per eliminare un indirizzo passato con POST:
+\begin{verbatim}
+                "DELETE FROM Indirizzi 
+                WHERE sigla = '".$_POST["sigla"]."'";
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutti gli indirizzi e i relativi sovrintendenti:
+\begin{verbatim}
+                "SELECT I.*, U.nome as snome, U.cognome as scognome
+                FROM Indirizzi I INNER JOIN Utenti U
+                ON I.sovrintendente = U.ID_utente"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutte le classi ordinate per anno, indirizzo e sezione:
+\begin{verbatim}
+                "SELECT *
+                FROM Classi
+                ORDER BY anno, indirizzo, sezione"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutte le aziende:
+\begin{verbatim}
+                "SELECT *
+                FROM Aziende"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere il numero di classi con stesso anno e indirizzo:
+\begin{verbatim}
+                "SELECT COUNT(*) as nclasses
+                FROM Classi
+                WHERE anno = ".$_GET["year"]."
+                AND indirizzo = '".$_GET["course"]."'"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutti i docenti:
+\begin{verbatim}
+                "SELECT *
+                FROM Utenti U INNER JOIN Tipi_utente T
+                ON U.tipo_utente = T.ID_tipoutente
+                WHERE T.tipo = 'Docente'";
+\end{verbatim}
+
+\\*
+\newpage
+\noindent
+Per ottenere tutte le classi di tutti gli indirizzi di un sovrintendente o di uno in particolare (per \$courses = '*' selezionerà tutti gli indirizzi presieduti dal docente \$doc, altrimenti selezionerà solo il corso \$courses):
+\begin{verbatim}
+                "SELECT *
+                FROM Indirizzi I INNER JOIN Classi C
+                ON I.sigla = C.indirizzo
+                WHERE I.sovrintendente = $doc
+                AND (I.sigla = '$courses' OR '$courses' = '*')
+                ORDER BY C.anno, C.indirizzo, C.sezione"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutti i tutor di tutte le aziende o di una in particolare (per \$site = '*' selezionerà tutte le aziende, altrimenti selezionerà solo l'azienda \$site):
+\begin{verbatim}
+                "SELECT *
+                FROM Utenti U INNER JOIN Tipi_utente T
+                ON U.tipo_utente = T.ID_tipoutente
+                WHERE T.tipo = 'Tutor'
+                AND (U.id_azienda = '$site' OR '$site' = '*')"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutti gli studenti di tutte le classi o di una in particolare (per \$class = '*' selezionerà tutte le classi, altrimenti selezionerà solo la classe \$class):
+\begin{verbatim}
+                "SELECT * 
+                FROM Utenti U INNER JOIN Tipi_utente T
+                ON U.tipo_utente = T.ID_tipoutente
+                WHERE (U.id_classe = '$class' OR '$class' = '*')
+                AND T.tipo = 'Studente'"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere gli utenti di tutti i tipi o di uno in particolare (per \$\_GET["users"] = '*' selezionerà tutti i tipi di utente, altrimenti selezionerà solo quelli di tipo \$\_GET["users"]:
+\begin{verbatim}
+                "SELECT *
+                FROM ((Utenti U LEFT JOIN Aziende A
+                ON U.id_azienda = A.ID_azienda) 
+                LEFT JOIN Tipi_utente T
+                ON U.tipo_utente = T.ID_tipoutente)
+                LEFT JOIN Classi C
+                ON U.id_classe = C.ID_classe
+                WHERE tipo_utente = '".$_GET["users"]."'
+                OR \"".$_GET["users"]."\" = \"*\""
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutte le aziende e i relativi referenti:
+\begin{verbatim}
+                "SELECT A.*,U.nome, U.cognome
+                FROM Aziende A INNER JOIN Utenti U
+                ON A.referente = U.ID_utente";
+\end{verbatim}
+
+\\*
+\noindent
+Per selezionare tutte le classi e i relativi sovrintendenti (che dipendono dall'indirizzo) di tutti gli indirizzi o di un indirizzo in particolare (per \$\_GET["classes"] = '*' selezionerà tutti gli indirizzi, altrimenti selezionerà solo l'indirizzo \$\_GET["classes"]):
+\begin{verbatim}
+                "SELECT C.*, I.*, U.nome as snome, U.cognome as scognome
+                FROM (Classi C INNER JOIN Indirizzi I
+                ON C.indirizzo = I.sigla) INNER JOIN Utenti U
+                ON I.sovrintendente = U.ID_utente
+                WHERE C.indirizzo = '".$_GET["classes"]."'
+                OR \"".$_GET["classes"]."\" = \"*\"
+                ORDER BY C.anno, C.indirizzo, C.sezione"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere il numero di studenti che fanno parte della classe \$riga["ID\_classe"]:
+\begin{verbatim}
+                "SELECT COUNT(*)AS nstud 
+                FROM Utenti 
+                WHERE ID_classe = ".$riga["ID_classe"]
+\end{verbatim}  
+
+\\*
+\noindent
+Per ottenere le attività di tutoring, con diversi filtri: \$azienda tiene tutte le aziende ('*') o una in particolare, \$tutor tiene tutti i tutor (*) o uno in particolare, \$studente tiene tutti gli studenti (*) o uno in particolare, \$classe tiene tutte (*) le classi o una in particolare.
+\begin{verbatim}
+                "SELECT T.*, A.denominazione AS azienda, A.referente,
+                Us.ID_utente as ID_studente, Ut.ID_utente as ID_tutor,
+                Ut.nome AS tnome, Ut.cognome AS tcognome,
+                Us.nome AS snome, Us.cognome AS scognome, C.*
+                FROM (((Tutoring T INNER JOIN Utenti Ut 
+                ON T.id_tutor = Ut.ID_utente)
+                INNER JOIN Utenti Us 
+                ON T.id_studente = Us.ID_utente)
+                INNER JOIN Classi C
+                ON Us.id_classe = C.ID_classe)
+                INNER JOIN Aziende A
+                ON Ut.id_azienda = A.ID_azienda
+                WHERE (A.ID_azienda = '$azienda' OR '$azienda' = '*')
+                AND (Ut.ID_utente = '$tutor' OR '$tutor' = '*')
+                AND (Us.ID_utente = '$studente' OR '$studente' = '*')
+                AND (C.ID_classe = '$classe' OR '$classe' = '*')"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere i dati dell'indirizzo \$course:
+\begin{verbatim}
+                "SELECT I.*, U.nome AS unome, U.cognome AS ucognome 
+                FROM Indirizzi I INNER JOIN Utenti U 
+                ON I.sovrintendente = U.ID_utente 
+                WHERE I.sigla = '$course'"
+\end{verbatim}  
+
+\\*
+\newpage
+\noindent
+Per verificare se le credenziali inserite corrispondono ad un utente registrato e autorizzato:
+\begin{verbatim}
+                "SELECT * 
+                FROM Utenti U INNER JOIN Tipi_utente T
+                ON U.tipo_utente = T.ID_tipoutente
+                WHERE email = \"$log_email\"
+                AND password = \"$log_password\"
+                AND autorizzato = '1'"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere il sovrintendente di un indirizzo dato uno studente \$user:
+\begin{verbatim}
+                "SELECT I.sovrintendente
+                FROM (Utenti U INNER JOIN Classi C 
+                ON U.id_classe = C.ID_classe)
+                INNER JOIN Indirizzi I
+                ON C.indirizzo = I.sigla
+                WHERE U.ID_utente = $user"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere le attività di tutoring che lo studente correntemente loggato ha fatto con il tutor \$tutor:
+\begin{verbatim}
+                "SELECT I.sovrintendente
+                FROM (Utenti U INNER JOIN Classi C 
+                ON U.id_classe = C.ID_classe)
+                INNER JOIN Indirizzi I
+                ON C.indirizzo = I.sigla
+                WHERE U.ID_utente = ".$_SESSION["userid"]
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere le attività di tutoring svolte dallo studente \$user nell'azienda il cui referente è l'utente correntemente loggato:
+\begin{verbatim}
+                "SELECT *
+                FROM (Tutoring T INNER JOIN Utenti U
+                ON T.id_tutor = U.ID_utente)
+                INNER JOIN Aziende A
+                ON U.id_azienda = A.ID_azienda
+                WHERE A.referente = ".$_SESSION["userid"]." 
+                AND T.id_studente $user"
+\end{verbatim}
+
+\\*
+\noindent
+Per verificare che l'utente \$user sia un tutor dell'azienda del referente correntemente loggato:
+\begin{verbatim} 
+                SELECT *
+                FROM (Utenti U1 INNER JOIN Aziende A
+                ON U1.ID_utente = A.referente)
+                INNER JOIN Utenti U2
+                ON A.ID_azienda = U2.id_azienda
+                WHERE U1.ID_utente = " . $_SESSION["userid"] . " 
+                AND U2.ID_utente = $user"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere le attività di tutoring svolte dallo studente \$user con il tutor correntemente loggato:
+\begin{verbatim}
+                "SELECT *
+                FROM Tutoring 
+                WHERE id_tutor = ".$_SESSION["userid"]." 
+                AND id_studente = $user"
+\end{verbatim}
+
+\\*
+\noindent
+Per togliere l'autorizzazione all'utente \$user:
+\begin{verbatim}
+                "UPDATE Utenti
+                SET autorizzato = '0'
+                WHERE ID_utente = $user"
+\end{verbatim}
+
+\\*
+\noindent
+Per attribuire l'autorizzazione all'utente \$user:
+\begin{verbatim}
+                "UPDATE Utenti
+                SET autorizzato = '1'
+                WHERE ID_utente = $user"
+\end{verbatim}
+
+\\*
+\noindent
+Per modificare un'attività di tutoring con i dati passati per POST:
+\begin{verbatim}
+                "UPDATE Tutoring
+                SET valutazione = '".$_POST["evaluation"]."'
+                WHERE id_tutor = '".$_POST["tutor"]."'
+                AND id_studente = '".$_POST["stud"]."'
+                AND data_inizio = '".$_POST["start"]."'"
+\end{verbatim}
+
+
+\\*
+\noindent
+Per modificare i dati di uno studente:
+\begin{verbatim}
+                "UPDATE Utenti
+                SET id_classe='".$_POST["rsel"]."',
+                    nome = '".$_POST["nome"]."',
+                    cognome = '".$_POST["cognome"]."',
+                    email = '".$_POST["email"]."',
+                    tipo_utente = '".$_POST["tipoutente"]."'
+                WHERE ID_utente = $user"
+\end{verbatim}
+
+\\*
+\noindent
+Per modificare i dati di un tutor:
+\begin{verbatim}
+                "UPDATE Utenti
+                SET id_azienda='".$_POST["rsel"]."',
+                    nome = '".$_POST["nome"]."',
+                    cognome = '".$_POST["cognome"]."',
+                    email = '".$_POST["email"]."',
+                    tipo_utente = '".$_POST["tipoutente"]."'
+                WHERE ID_utente = $user";
+\end{verbatim}
+
+\\*
+\noindent
+Per modificare i dati di un utente non tutor e non studente:
+\begin{verbatim}
+                "UPDATE Utenti
+                SET nome = '".$_POST["nome"]."',
+                    cognome = '".$_POST["cognome"]."',
+                    email = '".$_POST["email"]."',
+                    tipo_utente = '".$_POST["tipoutente"]."'
+                WHERE ID_utente = $user"
+\end{verbatim}
+
+\\*
+\noindent
+Per eliminare l'utente \$user:
+\begin{verbatim}
+                "DELETE FROM Utenti
+                WHERE ID_utente = $user
+\end{verbatim}
+
+\\*
+\noindent
+Seleziono tutte le attività di PCTO di uno studente \$user:
+\begin{verbatim}
+                "SELECT T.*, A.denominazione AS azienda, 
+                Ut.ID_utente AS ID_tutor, Ut.nome AS tnome, 
+                Ut.cognome AS tcognome, Us.nome AS snome, 
+                Us.cognome AS scognome, 
+                Us.ID_utente as ID_studente, C.*
+                FROM (((Tutoring T INNER JOIN Utenti Ut 
+                ON T.id_tutor = Ut.ID_utente)
+                INNER JOIN Utenti Us 
+                ON T.id_studente = Us.ID_utente)
+                INNER JOIN Classi C
+                ON Us.id_classe = C.ID_classe)
+                INNER JOIN Aziende A
+                ON Ut.id_azienda = A.ID_azienda
+                WHERE Us.ID_utente = '$user'
+                ORDER BY T.data_inizio"
+\end{verbatim}
+
+\\*
+\newpage
+\noindent
+Per ottenere tutte le attività di PCTO di uno studente seguito da un determinato tutor correntemente loggato:
+\begin{verbatim}
+                "SELECT T.*, A.denominazione AS azienda, 
+                Ut.ID_utente AS ID_tutor,Ut.nome AS tnome, 
+                Ut.cognome AS tcognome, Us.nome AS snome, 
+                Us.cognome AS scognome, Us.ID_utente as ID_studente, C.*
+                FROM (((Tutoring T INNER JOIN Utenti Ut 
+                ON T.id_tutor = Ut.ID_utente)
+                INNER JOIN Utenti Us 
+                ON T.id_studente = Us.ID_utente)
+                INNER JOIN Classi C
+                ON Us.id_classe = C.ID_classe)
+                INNER JOIN Aziende A
+                ON Ut.id_azienda = A.ID_azienda
+                WHERE Us.ID_utente = '$user'
+                AND Ut.ID_utente = '".$_SESSION["userid"]."'
+                ORDER BY T.data_inizio"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutte le attività di PCTO di uno studente \$user seguito da tutor di un'azienda specifica \$azienda:
+\begin{verbatim}
+                "SELECT T.*, A.denominazione AS azienda, 
+                Ut.ID_utente AS ID_tutor,Ut.nome AS tnome, 
+                Ut.cognome AS tcognome, Us.nome AS snome, 
+                Us.cognome AS scognome, Us.ID_utente as ID_studente, C.*
+                FROM (((Tutoring T INNER JOIN Utenti Ut 
+                ON T.id_tutor = Ut.ID_utente)
+                INNER JOIN Utenti Us 
+                ON T.id_studente = Us.ID_utente)
+                INNER JOIN Classi C
+                ON Us.id_classe = C.ID_classe)
+                INNER JOIN Aziende A
+                ON Ut.id_azienda = A.ID_azienda
+                WHERE Us.ID_utente = '$user'
+                AND A.ID_azienda = '$azienda'
+                ORDER BY T.data_inizio"
+\end{verbatim}
+
+\\*
+\noindent
+\newpage
+Per ottenere tutte le attività di tutoring fatte da un tutor \$user:
+\begin{verbatim}
+                "SELECT T.*, A.denominazione AS azienda, 
+                Ut.nome AS tnome, Ut.cognome AS tcognome,
+                Us.nome AS snome, Us.ID_utente AS ID_studente,
+                Us.cognome AS scognome, C.*
+                FROM (((Tutoring T INNER JOIN Utenti Ut 
+                ON T.id_tutor = Ut.ID_utente)
+                INNER JOIN Utenti Us 
+                ON T.id_studente = Us.ID_utente)
+                INNER JOIN Classi C
+                ON Us.id_classe = C.ID_classe)
+                INNER JOIN Aziende A
+                ON Ut.id_azienda = A.ID_azienda
+                WHERE Ut.ID_utente = '$user'
+                ORDER BY T.data_inizio"
+\end{verbatim}
+\\*
+\noindent
+Per ottenere tutte le attività di tutoring che lo studente loggato ha seguito da un tutor \$user:
+\begin{verbatim}
+                "SELECT T.*, A.denominazione AS azienda, 
+                Ut.nome AS tnome, Ut.cognome AS tcognome,
+                Us.nome AS snome, Us.ID_utente AS ID_studente, 
+                Us.cognome AS scognome, C.*
+                FROM (((Tutoring T INNER JOIN Utenti Ut 
+                ON T.id_tutor = Ut.ID_utente)
+                INNER JOIN Utenti Us 
+                ON T.id_studente = Us.ID_utente)
+                INNER JOIN Classi C
+                ON Us.id_classe = C.ID_classe)
+                INNER JOIN Aziende A
+                ON Ut.id_azienda = A.ID_azienda
+                WHERE Ut.ID_utente = '$user'
+                AND Us.ID_utente = '".$_SESSION["userid"]."'
+                ORDER BY T.data_inizio"
+\end{verbatim}
+
+\\*
+\newpage
+\noindent
+Per ottenere tutte le attività di tutoring effettuate in un'azienda \$azienda:
+\begin{verbatim}
+                "SELECT T.*, A.denominazione AS azienda, A.ID_azienda, 
+                Ut.nome AS tnome, Ut.cognome AS tcognome,
+                Us.nome AS snome, Us.ID_utente AS ID_studente, 
+                Us.cognome AS scognome, C.*
+                FROM (((Tutoring T INNER JOIN Utenti Ut 
+                ON T.id_tutor = Ut.ID_utente)
+                INNER JOIN Utenti Us 
+                ON T.id_studente = Us.ID_utente)
+                INNER JOIN Classi C
+                ON Us.id_classe = C.ID_classe)
+                INNER JOIN Aziende A
+                ON Ut.id_azienda = A.ID_azienda
+                WHERE A.ID_azienda = '$azienda'
+                ORDER BY T.data_inizio"
+\end{verbatim}
+
+\\*
+\noindent
+Per inserire una nuova azienda:
+\begin{verbatim}
+                "INSERT INTO Aziende (denominazione, referente)
+                VALUES('$site_name', '$site_ref')"
+\end{verbatim}
+
+\\*
+\noindent
+Per ottenere tutti i referenti che non sono ancora associati ad un'azienda:
+\begin{verbatim}
+                "SELECT * 
+                FROM  Utenti U INNER JOIN Tipi_utente T
+                ON U.tipo_utente = T.ID_tipoutente
+                WHERE T.tipo = 'Referente'
+                AND NOT EXISTS (
+                            SELECT * 
+                            FROM Aziende A
+                            WHERE A.referente = U.ID_utente
+                )"
+\end{verbatim}
+
+\\*
+\noindent
+Per inserire un'attività di tutoring:
+\begin{verbatim}
+                "INSERT INTO Tutoring (id_tutor, 
+                    id_studente, data_inizio, 
+                    data_fine, ore_totali, ore_assenza)
+                VALUES('$tutor', '$student', '$start', 
+                    '$end', '$tothours', '$absencehours')"
+\end{verbatim}
+
+
+\\*
+\noindent
+\newpage
+Per modificare un'attività di tutoring:
+\begin{verbatim}
+                "UPDATE Tutoring 
+                SET data_inizio = '".$_POST["newstart"]."',
+                data_fine = '".$_POST["newend"]."',
+                ore_totali = '".$_POST["oretot"]."',
+                ore_assenza = '".$_POST["oreab"]."',
+                valutazione = '".$_POST["evaluation"]."'
+                WHERE id_tutor = '".$_POST["tutor"]."'
+                AND id_studente = '".$_POST["stud"]."'
+                AND data_inizio = '".$_POST["start"]."'"
+\end{verbatim}
+
+\\*
+\noindent
+Per eliminare un'attività di tutoring:
+\begin{verbatim}
+                DELETE FROM Tutoring 
+                WHERE id_tutor = '".$_POST["tutor"]."'
+                AND id_studente = '".$_POST["stud"]."'
+                AND data_inizio = '".$_POST["start"]."'"
+\end{verbatim}
+
+\\*
+\noindent
+Per inserire un nuovo studente.
+\begin{verbatim}
+                "INSERT INTO Utenti (nome, cognome, password,
+                email, autorizzato, id_classe, tipo_utente)
+                VALUES('$user_name', '$user_surname',
+                '".hash("sha512", $user_pass)."','$user_email',
+                '1', '$user_class', '$user_type')"
+\end{verbatim}
+
+\\*
+\noindent
+Per inserire un nuovo tutor:
+\begin{verbatim}
+                "INSERT INTO Utenti (nome, cognome, password,
+                email, autorizzato, id_azienda, tipo_utente)
+                VALUES('$user_name', '$user_surname', 
+                '".hash("sha512", $user_pass)."','$user_email',
+                '$authorized', '$user_site', '$user_type')"
+\end{verbatim}  
+
+\\*
+\noindent
+Per inserire un nuovo utente non tutor e non studente:
+\begin{verbatim}
+                "INSERT INTO Utenti (nome, cognome, password, email, 
+                autorizzato, tipo_utente)
+                VALUES('$user_name', '$user_surname', '".hash("sha512",
+                $user_pass)."','$user_email','1', '$user_type')"
+\end{verbatim}
+
+\newpage
+\subsection{Funzioni JavaScript}
+\paragraph{Funzioni comuni\\*}
+\noindent
+Per togliere o mettere il menù per il logout:
+\begin{verbatim}
+    toogleForm()
+\end{verbatim}
+
+
+\paragraph{classinsertion.php\\*}
+\noindent
+Per aggiornare automaticamente il valore della sezione di una classe, una volta che vengono modificati anno o indirizzo:
+\begin{verbatim}
+    updateForm()
+\end{verbatim}
+
+\paragraph{classmanagement.php\\*}
+\noindent
+Per richiedere il form di modifica di una classe, passata per parametro:
+\begin{verbatim}
+    editClassForm(a)
+\end{verbatim}
+\\*
+\noindent
+Per richiedere le classi al cambio dell'indirizzo, con select dell'indirizzo passato per parametro:
+\begin{verbatim}
+    requestClasses(x)
+\end{verbatim}
+
+\paragraph{couorsemanagement.php\\*}
+\noindent
+Per richiedere il form di modifica di un indirizzo, passato per parametro:
+\begin{verbatim}
+    editCourseForm(a)
+\end{verbatim}
+
+\\*
+\noindent
+Per richiedere il form di inserimento di un nuovo indirizzo:
+\begin{verbatim}
+    requestForm()
+\end{verbatim}
+
+\paragraph{index.php\\*}
+\noindent
+Per togliere il messaggio di errore in un input passato per parametro:
+\begin{verbatim}
+    fixInputError(x)
+\end{verbatim}
+
+\\*
+\noindent
+Per controllare se il form di login presenta campi vuoti:
+\begin{verbatim}
+    checkLogForm() -> bool
+\end{verbatim}
+
+\paragraph{myclasses.php\\*}
+\noindent
+Per richiedere le classi di un docente, passando per parametro il select dell'indirizzo:
+\begin{verbatim}
+    updateForm(x)
+\end{verbatim}
+
+\paragraph{profile.php\\*}
+\noindent
+Per richiedere il form di modifica di un utente:
+\begin{verbatim}
+    profileEditForm()
+\end{verbatim}
+
+\\*
+\noindent
+Per richiedere i select associati a tutor (tutte le aziende) e studenti (tutte le classi), in base al valore del select passato per parametro:
+\begin{verbatim}
+    updateForm(x)
+\end{verbatim}
+
+\\*
+\noindent
+Per richiedere il form di modifica della valutazione di un'attività di tutoring, passati per parametro l'id dello studente, l'id del tutor e la data di inizio:
+\begin{verbatim}
+    editEvaluation(a,b,c)
+\end{verbatim}
+
+\paragraph{sitemanagement.php\\*}
+\noindent
+Per richiedere la tabella delle aziende:
+\begin{verbatim}
+    requestSites()
+\end{verbatim}
+
+\paragraph{tutoringinsertion.php\\*}
+\noindent
+Per richiedere la lista dei tutor passando per parametro l'id dell'azienda:
+\begin{verbatim}
+    requestTutors(x)
+\end{verbatim}
+
+\\*
+\noindent
+Per richiedere le classi, passando per parametro l'id dell'indirizzo:
+\begin{verbatim}
+    requestClasses(x)
+\end{verbatim}
+
+\\*
+\noindent
+Per richiedere gli studenti, passando per parametro l'id della classe:
+\begin{verbatim}
+    requestStudents(x)
+\end{verbatim}
+\\*
+\noindent
+Per richiedere la tabelle delle attività di tutoring, in funzione dei valori dei select:
+\begin{verbatim}
+    requestTutoringInfo()
+\end{verbatim}
+
+\paragraph{tutoringmanagement.php\\*}
+\noindent
+Per richiedere la lista dei tutor passando per parametro l'id dell'azienda:
+\begin{verbatim}
+    requestTutors(x)
+\end{verbatim}
+
+\\*
+\noindent
+Per richiedere il form di modifica di un'attività di tutoring, passando per parametro l'id dello studente, l'id del tutor e la data di inizio:
+\begin{verbatim}
+    editTutoringForm(a,b,c)
+\end{verbatim}
+
+\\*
+\textbf{}
+Per richiedere le classi, passando per parametro l'id dell'indirizzo:
+\begin{verbatim}
+    requestClasses(x)
+\end{verbatim}
+
+\\*
+\noindent
+Per richiedere gli studenti, passando per parametro l'id della classe:
+\begin{verbatim}
+    requestStudents(x)
+\end{verbatim}
+\\*
+\noindent
+Per richiedere la tabelle delle attività di tutoring, in funzione dei valori dei select:
+\begin{verbatim}
+    requestTutoringInfo()
+\end{verbatim}
+
+\paragraph{userinsertion.php\\*}
+\noindent
+Per richiedere i select associati a tutor (tutte le aziende) e studenti (tutte le classi), in base al valore del select passato per parametro:
+\begin{verbatim}
+    updateForm(x)
+\end{verbatim}
+
+\paragraph{usermanagement.php\\*}
+\noindent
+Per richiedere gli utenti in base all'id del tipo di utente passato per parametro:
+\begin{verbatim}
+    requestUsers(x)
+\end{verbatim}
+
+\newpage
+\section{Sicurezza dei dati}
+Poniamoci ora il problema della sicurezza dell’applicativo appena sviluppato, visto che i dati trattati sono considerati personali e la loro compromissione, oltre a danneggiare l’utente i cui dati sono stati esposti, porta un danno anche al detentore dell’applicativo, che si trova costretto ad affrontare le conseguenze del data breach.
+Parlando di sicurezza di un applicativo come questo, ovvero una sorta di “cruscotto elettronico” che permette di attingere a dati che si è autorizzati a visionare (e in alcuni casi anche di inserirne), ci si può trovare davanti a 2 momenti critici: la memorizzazione dei dati e il loro accesso.
+\bigskip
+
+\subsection{La memorizzazione dei dati}
+\subsubsection{il database o altre forme di archiviazione}
+Un primo bivio davanti al quale ci si potrebbe trovare nella creazione di un sistema che necessita di salvare dei dati potrebbe essere rappresentato dalla scelta tra un archivio o un database (inteso come sistema software formato da base di dati e DBMS come interfaccia).\\*
+Ovviamente per la realizzazione dell’applicativo in esame questo problema non si è posto, essendo richiesta esplicita la sua realizzazione tramite database. Nonostante questo trovavo utile sottolineare i problemi dell’alternativa proposta: l'archiviazione in file, che ovviamente è sconsigliata.\\*
+Il principale problema è la mancanza di un’interfaccia (il DBMS). Questo comporta che le operazioni che normalmente verrebbero effettuate da questa, debbano invece essere integrate all’interno dell’applicativo stesso, aumentando, di conseguenza, anche la complessità complessiva dell’applicazione.
+La mancanza di un DBMS non si limita a rendere “scomoda” la realizzazione di un sistema con archiviazione su file tradizionali, ma la rende anche poco sicura, in quanto il Manager del database mette anche in campo delle misure per aumentare la sicurezza dei dati salvati, che saranno analizzate nei prossimi paragrafi.
+
+\bigskip
+\paragraph{Autorizzazioni}Il DBMS impedisce l’accesso agli utenti non autorizzati.
+\\*L’autenticazione avviene tramite una password, collegata ad un utente del database.
+Una volta autenticato l’utente può avere accesso all’intera base di dati o ad un suo sottoinsieme: una vista. 
+La possibilità di limitare la porzione di database a cui un utente può accedere, rende il database più sicuro, d’altra parte però non è impossibile che un malintenzionato ottenga l’accesso ad un utente con determinati privilegi, soprattutto se vengono usati account con nomi e password di default.
+
+\bigskip
+\paragraph{Integrità}
+Uno dei principali problemi nella realizzazione di sistemi che operano su dati condivisi con più utenti contemporaneamente, è la necessità di garantire l’integrità dei dati (oltre che alla velocità nella elaborazione di tutte le richieste). 
+Questa è una delle funzionalità del DBMS, che permette ad esempio il blocco del record che sta venendo \\*modificato, il mantenimento dei vincoli di integrità referenziale, il divieto di inserire due record con la stessa chiave primaria, ecc..
+È importante in questo contesto anche il concetto di transazione, ovvero una sequenza di operazioni che apporta una variazione effettiva sulla base di dati solo nel caso del completamento con successo dell’intera sequenza, garantendo quindi che le operazioni che non vengano lasciate a metà in caso di un qualche errore del Database o in caso di guasti o blackout.
+
+\bigskip
+\paragraph{Ridondanza e persistenza}
+I DBMS solitamente presentano anche funzionalità che permettono di gestire la ridondanza dei dati. I dati vengono quindi partizionati e ripetuti su più dischi o addirittura server diversi.
+Questo permette la persistenza dei dati in caso di danneggiamento di un disco.
+Aumentare la ridondanza del database permette quindi un maggiore grado di sicurezza sui dati. Come conseguenza, però, i costi e in generale le risorse da mettere in campo per la gestione del database aumentano. Il discorso dei costi sarà comunque ripreso in seguito.
+
+\bigskip
+\subsubsection{Forme di protezione di un database}
+Come esplicitato in precedenza, i DBMS più recenti offrono delle soluzioni per garantire un certo grado di sicurezza sui dati, già a livello di applicazione (come nel caso dell’autenticazione).
+Questo però non è sufficiente per garantire la segretezza dei dati nel caso in cui un malintenzionato entri in possesso di un account di alto livello o direttamente della macchina dove i dati sono memorizzati.
+Il problema quindi si biforca nuovamente su due aspetti critici: la cifratura dei dati e la protezione da attacchi provenienti dalla rete.
+
+\bigskip
+\paragraph{Cifratura dei dati}
+Una soluzione per impedire l’accesso a dati sensibili potrebbe appunto consistere nella cifratura di questi dati. Quindi, in prima approssimazione,f si potrebbe pensare di criptare un determinata tabella con una determinata chiave. Questa pratica però è esposta a degli attacchi che sfruttano il fatto che due testi uguali vengano criptati nello stesso modo per risalire al sistema di cifratura.
+Per superare questo ed altri problemi si può optare per la cifratura di ogni campo di ogni record con una chiave diversa, oppure tutti i campi di tutti i record possono essere collegati crittograficamente, con sistemi come il CBC (Cipher Block Chaining).
+In generale, lo svantaggio principale della crittografia è la perdita di efficienza del database. Infatti ogni campo deve essere decifrato per eseguire le operazioni e ovviamente più è complicato il sistema di cifratura e più campi ci sono nel database, maggiore sarà il tempo necessario per eseguire tutte queste operazioni.
+Ad oggi la crittografia è una disciplina molto sviluppata. Esistono decine, se non centinaia, di algoritmi, sempre più sicuri ed efficienti. Le sue origini vanno ricercate nella storia.
+
+\bigskip
+\subparagraph{Digressione sulla crittografia}
+La crittografia è una disciplina tutt’altro che recente, anzi, ha origini molto antiche quanto è antica la necessità dell’uomo di far ricevere a persone fidate dei messaggi segreti. L’apice della crittografia è stato raggiunto con l'integrazione dell’informatica e delle telecomunicazioni, ma il concetto di base rimane lo stesso: trasmettere informazioni che solo chi ha la chiave possa decifrare. 
+
+\bigskip
+\subparagraph{La crittografia nella Seconda Guerra Mondiale}
+Durante la Seconda Guerra Mondiale c’è stata l’invenzione  e la diffusione su larga scala della macchina "Enigma", un calcolatore che faceva uso di rotori per cifrare messaggi, perché l’Europa, come affermò Gordon Brown, era il “teatro del momento più buio dell’umanità”, perché dai totalitarismi scaturì l'irrazionalismo. Questo portò con sé una serie di -ismi: razzismo, imperialismo, Fascismo, Nazismo.\\*
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \includegraphics[width=7.5cm]{enigma.png}
+\end{wrapfigure}
+Fu durante il Secondo Conflitto Mondiale che Enigma fu usata dai tedeschi nei sommergibili, per comunicare le strategie di attacco, anche a  distanza, mantenendo contemporaneamente la segretezza.\\*
+
+Ed è proprio in questo contesto che Alan Turing, pioniere dell’informatica e dell’intelligenza artificiale, famoso per la “Macchina di Turing”, fu incaricato di decifrare il codice di Enigma. Ci riuscì realizzando le “bombe” britanniche: delle macchine elettromeccaniche in grado di risalire alla posizione originale dei rotori, permettendo così la decifrazione dei messaggi.
+
+\bigskip
+\subparagraph{Il contesto storico-culturale della WWII}
+L’irrazionalismo di cui si parlava investì anche gli intellettuali che dettero vita a diversi movimenti culturali e Avanguardie che vengono raccolti nell’alveo del Decadentismo.\\* Alcuni vissero l'irrazionalismo senza disagio e tra questi l’oratore, esteta e superomista D’Annunzio che sostenne la guerra e il Fascismo. Il suo ideale era fare della propria vita un’opera d’arte. Divenne il vate dell’Imperialismo e del nazionalismo aggressivo. A lui si avvicinerà un'Avanguardia: il Futurismo, che riprese il superomismo e la volontà di potenza tanto che Marinetti, il caposcuola, vedrà la guerra come “unica igiene del mondo”, richiamando Nietzsche. \\*
+Ma Nietzsche, il teorico della teoria del superuomo, intendeva per superuomo colui che andava oltre alla morale comune per uscire dal grigio diluvio del conformismo.
+
+\bigskip
+\paragraph{Protezione da attacchi provenienti dalla rete}
+Se un’azienda offre servizi tramite dei server posti all’interno della sua rete porta, inevitabilmente, degli sconosciuti all’interno della rete LAN aziendale e questo comporta un certo grado di rischio che i propri dati, se anche questi sono all’interno della rete, possano essere esposti.
+Per provare ad arginare il problema si può optare per un firewall che, con i dovuti aggiornamenti periodici potrebbe arginare in parte questo problema.\\*
+Tuttavia oggigiorno è fortemente sconsigliata l’apertura della propria rete in modo da permettere ad utenti sconosciuti di accedervi. 
+
+
+\bigskip
+\subparagraph {La DMZ}
+I firewall moderni portano quindi una soluzione alternativa: la DMZ (Demilitarized Zone).\\*
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \includegraphics[width=7.5cm]{dmz.jpg}
+\end{wrapfigure}
+La DMZ è un’area della rete separata dalla LAN che pertanto necessita di apposite regole di comunicazione DMZ to LAN e LAN to DMZ per comunicare con quest'ultima.
+Nel caso dell’applicativo in esame, si potrebbe disporre un Web server nella DMZ a cui quindi viene dirottato il traffico in ingresso dalla WAN.
+In questa configurazione il database invece si troverebbe all’interno della rete LAN.
+In questo modo nel peggiore dei casi, sarà compromessa solo la macchina su cui gira il web server, posta nella DMZ.\\*
+Analiziamo quindi una situazione generica di utilizzo della DMZ.\\*
+Supponiamo che un'azienda abbia posizionato il suo webserver la sua rete con una DMZ implementata in modo ottimale. Un cliente che vuole accedere al sito dell'azienda dovrà in qualche modo raggiungere il gateway della rete aziendale. Semplificando, questo comporta che in qualche modo bisogna arrivare alla porta WAN del router, ovvero quella da cui giungono i pacchetti provenienti dalla rete internet.\\*
+Questo può essere fatto direttamente tramite un indirizzo IP pubblico o tramite un nome simbolico che quindi dovrà essere risolto attraverso il DNS. Questa seconda opzione è la più gettonata, però comporta dei costi per il mantenimento del dominio (il nome simbolico da associare all'ip pubblico).
+Il firewall a quel punto deve essere opportunamente configurato in modo da reindirizzare la comunicazione alla DMZ e per impedire l'accesso diretto alla rete aziendale. Una terza via di comunicazione, infine, è quella DMZ to LAN. Anche la configurazione di quest'ultima deve essere corretta in quanto il server nella DMZ potrebbe necessitare delle risorse presenti all'interno della rete, ma è anche importante impedire accessi indesiderati.
+
+\bigskip
+\subparagraph {Hosting e housing}
+Inserire il server all'interno della propria rete o all'interno della DMZ non sono le uniche soluzioni. Infatti esistono opzioni che si basano su servizi cloud. In particolare le opzioni sono l'hosting e l'housing.
+\\*L'hosting constiste nell'utilizzo di una macchina di proprietà dell'azienda a cui richiediamo il servizio, mentre l'hosting consiste nell'utilizzo di una propria macchina che viene però sempre affidata all'azienda che offre il servizio, che si occuperà di metterla in rete e di proteggerla adeguatamente.\\*
+Da una parte questi servizi permettono una maggiore sicurezza teorica, dal momento che i provider di determinati servizi sono generalmente affidabili dal punto di vista della sicurezza, da un'altra parte, però, con questi servizi il proprio server non è "sotto mano" e richiedono un determinato esborso economico per essere mantenuti.
+
+\bigskip
+\subsection{L'accesso ai dati}
+Analizziamo ora l’altro momento critico: l’accesso ai dati.\\*
+Per la natura dei dati trattati e delle ipotesi formulate in fase di progettazione, l’applicativo presenta una vista quasi univoca per ogni utente (con sola eccezione degli amministratori che condividono la vista totale sul database). Quindi è estremamente importante assicurarsi che ogni utente possa aver accesso a tutti i suoi dati e che assolutamente non possa accedere e tantomeno modificare quelli che non gli competono.
+In pratica, fare in modo che un utente riceva tutti i suoi dati non è sufficiente, bisogna anche scongiurare la possibilità che un utente forzi il sistema perché gli vengano forniti dati che non dovrebbe ricevere. Per esempio: supponiamo che esista una pagina che prende tramite form dei valori che poi vengono usati per una query nel database, se non si fanno dei controlli adeguati, un malintenzionato, senza troppa fatica, potrebbe manomettere il form stesso per fare in modo di eseguire una query su dati che vanno oltre la sua vista (in senso puramente simbolico, dal momento che se ci fosse una vista effettivamente definita, il problema non si porrebbe).
+Tuttavia questa è l’insidia minore, negli anni si sono evolute le più svariate tecniche per eludere i controlli e accedere o modificare dati su cui non si ha autorizzazione.
+Nei prossimi paragrafi verranno illustrate alcune di queste tecniche.
+
+\bigskip
+\subsubsection{Code Injections}
+È una tecnica che permette di sfruttare un errore all’interno dell’applicativo. Il risultato di una code injections è generalmente l’esecuzione di codice arbitrario sul server o l’accesso a informazioni che dovrebbero essere non raggiungibili.
+Ad esempio, una delle più note è la SQL injection, che permette di alterare una query SQL tramite l’input di un campo di testo. Ad esempio, analizziamo la seguente query:
+
+
+\begin{verbatim}
+    SELECT * 
+    FROM utenti 
+    WHERE username = '?' AND password = '?'
+\end{verbatim}
+
+dove al posto dei ? ci andranno i valori inseriti dall’utente nel form di login.
+Se l’utente inserisse il carattere apostrofo (‘), cosa succederebbe? SQL interpreterebbe quell’apostrofo come la chiusura della stringa, pertanto tutto quello che andrà inserito dopo sarà interpretato come codice  SQL.
+La più celebre SQL injection è la seguente: ‘ OR ‘1’ = ‘1.
+Se inserita in entrambi i campi di testo del login, ecco come diventerebbe la query riportata sopra:
+\begin{verbatim}
+    SELECT * 
+    FROM utenti 
+    WHERE username = '' OR '1' = '1'
+    AND password = '' OR '1' = '1'
+\end{verbatim}
+Il risultato è che l’utente ottiene l’accesso, nel peggiore dei casi anche con i privilegi di amministratore.
+Le SQL injection non sono le uniche code injection possibili, ne esistono di svariati tipi, anche in funzione di che tipo di operazioni svolge l’applicativo che si sta provando ad attaccare: per esempio se l’applicativo è progettato per eseguire un ping ad un host passato come parametro dall’utente, come in questo caso:
+\begin{verbatim}
+    system("ping " . \$_GET['host']);
+\end{verbatim}
+Si potrebbe eseguire una command injection, banalmente chiudendo il comando ping con un punto e virgola (;) e inserendo un altro comando dopo, come in questo esempio:
+\begin{verbatim}
+    ping example.com;somecommand
+\end{verbatim}
+
+\bigskip
+\subsubsection{Evitare le code Injections}
+Per rendere l’applicativo sicuro è quindi fondamentale sapere come fronteggiare e come proteggersi dalle code injections. Esistono delle cosiddette best practices:
+\begin{itemize}
+    \item validare e sanificare l’input: bisogna cercare eventuali caratteri e simboli che potrebbero fare parte di una injections. Potrebbe essere quindi una buona idea effettuare il whitelisting dei caratteri accettati.
+    \item evitare assolutamente l’istruzione eval (presente in linguaggi come PHP e JavaScript) per eseguire stringhe prese direttamente dall’input di un utente. Infatti la funzione eval permette di eseguire codice arbitrario da una stringa, costituendo un enorme rischio per la sicurezza dell’applicativo.
+    \item le injections possono essere perpetrate attraverso molteplici tipologie di input, pertanto è buona norma non considerare una fonte come affidabile al 100\%.
+    \item limita il controllo che l’interprete della tua applicazione ha nei confronti delle configurazioni del server, impedendogli di eseguire command injection molto pericolose che permettono una privilege escalation.
+    \item utilizza strumenti che permettono di scovare eventuali vulnerabilità nell’applicativo.
+\end{itemize}
+ 
+\bigskip
+\subsubsection{Broken authentication} 
+The term “Broken authentication” refers to a range of vulnerabilities that allow a span of attacks that could compromise the application security.
+Usually, this kind of vulnerability is due to the user, rather than the system itself.
+Broken authentications include some of the most common and destructive attacks.
+For example, if a hacker obtains the user’s Session ID, he can then steal his identity.
+The simplest case where a hacker can get the Session ID occurs when a user leaves the device without logging out. The hacker then can simply continue browsing using the user Session ID.
+Another example of Broken authentication vulnerability consists of a brute-force attack.
+The attacker tests credentials stolen from one site on different accounts.
+A variation of the same attack consists in testing a set of commonly used passwords.
+This kind of attack often works because people frequently use the same password across different applications and most people use weak passwords.
+
+\bigskip
+\subsubsection{Fix broken authentication}
+As I just said, Broken authentication related vulnerabilities are usually due to the user, but they can be avoided with some precaution.
+Session ID related attacks can be limited by shortening the duration of the session.
+Regarding the problem of weak passwords, It’s possible to introduce multi-factor authentication or prevent the user from using a weak password.
+
+\bigskip
+\subsubsection{Sniffing}
+Anche se non rientra esattamente nelle tecniche per accedere ai dati, in quanto in realtà si stanno intercettando dei dati a cui qualcuno ha effettuato un accesso legittimo, è doveroso evidenziare questo problema.
+Sebbene nell’immensità di internet sia difficile sniffare i pacchetti di una determinata comunicazione, lo sniffing diventa un problema ad esempio quanto viene fatto all’interno di una rete locale (sia da un utente che ne faccia davvero parte sia da un malintenzionato che ha avuto accesso alla rete, ad esempio tramite una vulnerabilità del WiFi).
+Il protocollo più utilizzato per la trasmissione di informazioni sul web è HTTP. Tuttavia, i dati scambiati con HTTP vengono mandati in chiaro, quindi colui che effettua lo sniffing si troverebbe tutta la comunicazione davanti, completa di password e altri dati sensibili. Quando si parla di dati sensibili, è chiaro come questo rappresenti un problema.
+Proprio a fronte di questo problema è stato sviluppato il protocollo HTTPs.
+
+\bigskip
+\paragraph{Il protocollo HTTPs}
+Il protocollo HTTPs è un protocollo per la comunicazione attraverso una rete di computer. È il protocollo più usato su Internet nell'ambito del trasferimento di informazioni, soprattutto se confidenziali.\\*
+È stato introdotto a fronte del problema di sicurezza del protocollo HTTP (illustrato in precedenza) e prevede che la comunicazione venga criptata tramite crittografia asimetrica dal Transport Layer Security, a sua volta un protocollo crittografico.\\*
+L'HTTPs risolve quindi il problema dello sniffing, tuttavia introduce dei costi e delle complicazioni nell'amministrazione del sito in quanto per usare questo protocollo è necessario ottenere delle chiavi e un certificato. Inoltre la necessità di criptare e decriptare i dati richiede sicuramente più risorse o comunque più tempo della semplice trasmissione tramite HTTP.
+
+\bigskip
+\paragraph{Servizi e socket}
+Parlando di protocolli è stato citato il termine "porta", che a sua volta ci collega al termine "Socket", ovvero la coppia indirizzo IP - Porta. Infatti l'indirizzo IP può identificare un host in rete, tuttavia non è sufficiente ad identificare il singolo servizio offerto da suddetto host.\\*
+Un host che offre un servizio rimane quindi "in ascolto" su una (o più) porte, il secondo host che vuole fare richiesta per quel determinato servizio dovrà conoscere sia l'ID dell'host (che ovviamente deve essere raggiungibile in rete) che la porta su cui è in ascolto, che non è detto sia standard, anzi, spesso le porte vengono cambiate per evitare attacchi diretti a quel servizio o che un estraneo possa accedervi senza permesso, tuttavia. Tuttavia "bombardare" tutte le porte non è un'attività particolarmente difficile, dal momento che queste sono "solo" 65536.\\* Nonostante i problemi di sicurezza che si vanno a creare lasciando delle "porte aperte", utilizzare i socket permette di creare delle applicazioni distribuite, che quindi permettono di sfruttare le infrastrutture di rete.\\*
+Inoltre sono disponibili svariate API (Application Programming Interface) che permettono di utilizzare i protocolli di rete, astraendosi però dall'hardware, semplificando il lavoro ai programmatori.
+
+\bigskip
+\subsection{Costi di implementazione}
+\subsubsection{Costi di setup}
+Tutte le misure di sicurezza illustrate ovviamente presentano dei costi di implementazione che molto spesso vengono sottovalutati. 
+In estrema sintesi, ipotizziamo che esista un valore unico che ci può dare un “grado di sicurezza totale” del sistema. Ora mettiamo questo valore in relazione con i costi per raggiungerlo e tracciamo un grafico: poniamo sull’asse x questo grado di sicurezza e sull’asse y i costi.
+Quella che ci troveremo davanti sarà una curva di carattere esponenziale, stando a significare che ad un lieve aumento del grado di sicurezza corrisponda una repentina crescita dei costi di implementazione. Oppure, guardando il grafico da un altro punto di vista, notiamo come ad un aumento costante dei costi corrisponda un aumento del grado di sicurezza sempre più insignificante. Quest’ultima è una caratteristica del grafico della funzione logaritmica, che in effetti è la funzione inversa di quella esponenziale.
+
+
+\begin{figure}[!htb]
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.7\linewidth]{funzione_esponenziale.PNG}
+     \caption{Funzione esponenziale}\label{Fig:Data1}
+   \end{minipage}\hfill
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.7\linewidth]{funzione_logaritmica.PNG}
+     \caption{Funzione logaritmica}\label{Fig:Data2}
+   \end{minipage}
+\end{figure}
+
+
+Volendo formalizzare queste ultime considerazioni, potremmo introdurre il concetto di costo marginale, che ci permette di calcolare il costo aggiuntivo necessario per incrementare il grado di sicurezza di un'unità.
+Tale costo è determinato dal rapporto tra la variazione del costo $\Delta$C e la variazione del grado di sicurezza $\Delta$S:
+
+\[C_m=\frac{\Delta C}{\Delta S}\]
+
+Dal punto di vista grafico, la funzione del costo marginale può essere approssimata attraverso la derivata della funzione che descrive i costi.
+Per prima cosa quindi definiamo la funzione esponenziale che descrive l’andamento dei costi in funzione del grado di sicurezza desiderato.
+
+Come già anticipato, questo calcolo è tutt’altro che banale, dato l’alto numero di variabili in gioco. Detto ciò, a scopo esemplificativo, ipotizziamo che la funzione sia la seguente:
+
+\[f(x) = 40e^{\frac{2}{5}x-10}+150\]
+In questo caso notiamo che la parte variabile dei nostri costi è rappresentata da \[40e^{\frac{2}{5}x-10}\], mentre i costi fissi sono 150. Questi ultimi non andranno a influire sul risultato del costo marginale.
+Per approssimare la funzione del costo marginale, calcoliamo quindi la derivata della funzione:
+
+\[f'(x) = 16e^{\frac{2}{5}x-10}\]
+
+\begin{center}
+    \includegraphics{costo_marginale.PNG}
+\end{center}
+
+Come avevamo già anticipato, i costi necessari per aumentare anche solo di un’unità il grado di sicurezza del sistema salgono molto velocemente, fino a diventare completamente insostenibili.
+D’altra parte, è anche corretto affermare che provare a risparmiare sull’implementazione di misure di sicurezza potrebbe rivelarsi una scelta controproducente.
+Infatti un danno causato da un attacco o da qualsiasi incombenza che poteva essere evitata, potrebbe portare non solo costi economici diretti, ma anche costi indiretti e quindi non quantificabili (come ad esempio la perdita della credibilità, seguita plausibilmente da una riduzione dei ricavi scaturita da una perdita di fiducia da parte dei clienti), molto gravi e potenzialmente difficili da sostenere.
+
+\bigskip
+\subsubsection{Costi nel tempo}
+È altrettanto importante non sottovalutare i costi che i meccanismi di sicurezza possono portare anche oltre la loro implementazione. Qualche esempio potrebbe essere rappresentato dall’energia elettrica consumata dai server aggiuntivi per garantire la ridondanza e dai relativi sistemi di raffreddamento, dal contratto con un’agenzia di cloud computing, dalla licenza per un software di antivirus, ecc..
+In questo caso il calcolo è facilitato, in quanto è “sufficiente” monitorare tutte le uscite relative alla sicurezza.
+Con i dati raccolti è possibile tracciare una curva su un grafico.\\*
+Supponendo ora che un’azienda che registri questi dati abbia degli obiettivi economici specifici, potrebbe porsi il problema di calcolare quanto i costi di tutti i meccanismi di sicurezza gravino sulle finanze dell’azienda e, in particolare, sui ricavi.
+Quindi il primo passo sarebbe ottenere il grafico dei ricavi per un determinato periodo di tempo, da associare a quello dei costi, citato prima.\\*
+Supponendo che l’azienda voglia calcolare la percentuale di ricavi che viene devoluta in costi relativi alla sicurezza, potremmo procedere introducendo il concetto di integrale.
+L’integrale è un operatore che ci permette di calcolare l’area sottesa da una curva in un determinato intervallo chiuso [a; b].
+In questo caso, a e b rappresentano i due momenti tra i quali vogliamo considerare costi e ricavi. Formalmente, gli integrali appena descritti, si scrivono in questo modo:
+
+\[Sc= \int_{a}^{b} C(x)dx\]
+\[Sr= \int_{a}^{b} R(x)dx\]
+\newline
+Dove Sc è l’area sottesa dalla curva dei costi, C(x) è la curva dei costi, Sr è l’area sottesa dalla curva dei ricavi e R(x) è la curva dei ricavi.
+Nella pratica questo calcolo viene eseguito scomponendo l’area delle curve in rettangoli con base che tende a 0. Una volta effettuata la scomposizione, si procede calcolando le aree dei rettangoli e sommandole.
+Più la base del rettangolo è piccola, migliore sarà il grado di approssimazione dell’area sottesa dalle curve.
+Una volta eseguiti tutti i calcoli, potremo procedere calcolando subito la percentuale di costi relativi alla sicurezza sui ricavi nel periodo di tempo [a; b], in questo modo:
+
+
+\[C_\%=\frac{Sc}{Sr}100\]
+Un altro utilizzo possibile delle aree è quello di calcolare i costi e i ricavi medi per unità di tempo, sempre nell’intervallo di tempo [a;b] che abbiamo considerato.
+Per farlo si utilizza il teorema della media integrale, che consiste in una generalizzazione dell’idea di media aritmetica.
+La dimostrazione di tale teorema ci porta ad affermare che, avendo una funzione continua in un intervallo [a;b] e dotata di massimo M e minimo m, esiste almeno un punto c tale che:
+
+\[f(c)= \frac{1}{b-a} \int_{a}^{b} f(x)dx\]
+
+A livello pratico, il valore f(c) rappresenterà l’altezza del rettangolo che, avendo la base equivalente a b-a, ha l’area equivalente a quella sottesa dalla funzione f(x), come mostrato nella figura seguente:
+
+\begin{center}
+    \includegraphics[width=8.5cm]{media_integrale.PNG}
+\end{center}
+\bigskip
+
+Utilizzando questo teorema quindi, possiamo constatare i ricavi e le spese dedicate alla sicurezza nell'intervallo di tempo [a;b]. Questi valori potrebbero rappresentare una risorsa da usare nella formulazione delle strategie aziendali.
+
+\bigskip
+\subsection{Considerazioni finali sulla sicurezza dei dati}
+In base a quanto appena illustrato, esistono svariati momenti critici in cui i dati che vengono trattati dall’applicativo in esame possono essere esposti.
+Pertanto il responsabile al trattamento dei dati deve necessariamente mettere in campo quante più risorse possibili con l’obiettivo di evitare il cosiddetto “Data Breach”, ovvero la fuga di dati in seguito ad un attacco.
+D’altra parte, come abbiamo visto, le risorse da mettere in campo per garantire un grado sempre crescente di sicurezza sono ingenti e richiedono un continuo aggiornamento, perché rimangano efficaci.
+Pertanto un’ipotetica azienda che si ponga il problema della sicurezza dei dati che tratta deve effettuare una pianificazione molto approfondita al fine di bilanciare il grado di sicurezza con gli obiettivi economici dell’azienda.
+In ogni caso la negligenza non è accettabile in quanto la normativa europea GDPR prevede delle responsabilità e degli obblighi nei confronti del titolare al trattamento dei dati e prevede anche delle sanzioni, nel caso queste non vengano rispettate.
+
 
 \end{document}
